@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Imagen</th>
+        <th>Precio</th>
+        <!-- Puedes agregar más columnas según las propiedades de tus productos -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>{{ producto.imagen }}</td>
+        <!--<td><img [src]="decodeBase64(producto.imagen)" alt="Imagen del producto"></td> -->
+        
+        <td>{{ producto.precio }}</td>
+        <!-- Ajusta las propiedades según la estructura de tus productos -->
+      </tr>
+    </tbody>
+  </table>
