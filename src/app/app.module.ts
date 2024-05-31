@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductListComponent } from './product-list/product-list.component';
+import { AuthInterceptor } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import { ProductListComponent } from './product-list/product-list.component';
     RouterModule
   ],
   providers: [UserService,
-              ProductService
+              ProductService,
+              {provide: HTTP_INTERCEPTORS,
+                useClass: AuthInterceptor,
+                multi: true 
+              }
   ],
   bootstrap: [AppComponent]
 })

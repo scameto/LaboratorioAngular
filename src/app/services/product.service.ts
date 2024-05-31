@@ -12,12 +12,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  getProductos(token: string): Observable<any> {
-    const headers = new HttpHeaders({
+  getProductos(): Observable<any> {
+   /*  const headers = new HttpHeaders({
       'authorization': token
     });
-
-    return this.http.get(this.apiUrl, { headers });
+ */
+    return this.http.get(`${this.apiUrl}/`);
   }
 
   

@@ -1,10 +1,11 @@
-<table class="table">
-    <thead>
+<div class="container mt-4">
+  <table class="table table-striped table-bordered">
+    <thead class="thead-dark">
       <tr>
         <th>ID</th>
         <th>Nombre</th>
-        <th>Descripcion</th>
-        <th>Imagen</th>
+        <th>Descripción</th>
+        <!--<th>Imagen</th> -->
         <th>Precio</th>
         <!-- Puedes agregar más columnas según las propiedades de tus productos -->
       </tr>
@@ -14,11 +15,10 @@
         <td>{{ producto.id }}</td>
         <td>{{ producto.nombre }}</td>
         <td>{{ producto.descripcion }}</td>
-        <td>{{ producto.imagen }}</td>
-        <!--<td><img [src]="decodeBase64(producto.imagen)" alt="Imagen del producto"></td> -->
-        
+        <!--<td><img [src]="decodeBase64(producto.imagen)" alt="Imagen del producto" class="img-thumbnail" style="max-width: 100px;"></td> -->
         <td>{{ producto.precio }}</td>
         <!-- Ajusta las propiedades según la estructura de tus productos -->
       </tr>
     </tbody>
   </table>
+</div>

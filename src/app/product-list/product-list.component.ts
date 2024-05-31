@@ -15,12 +15,12 @@ export class ProductListComponent {
   constructor(private productService: ProductService, private http:HttpClient) {}
 
   ngOnInit(){
-    this.obtenerToken();
+    //this.obtenerToken();
     this.loadProductos();
 
   }
 
-  obtenerToken() {
+/*   obtenerToken() {
     // Obtener el token del localStorage
     this.token = localStorage.getItem('token');
 
@@ -29,10 +29,10 @@ export class ProductListComponent {
     } else {
       console.error('No se encontró ningún token en el localStorage.');
     }
-  }
+  } */
 
   loadProductos(): void {
-    this.productService.getProductos(this.token).subscribe(
+    this.productService.getProductos().subscribe(
       (data: any[]) => {
         this.productos = data;
         console.log(data);
