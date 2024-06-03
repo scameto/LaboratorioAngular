@@ -32,7 +32,7 @@ export class LoginComponent {
           console.log('Response from server:', response);
           localStorage.setItem('token', response.token);
           console.log('Login successful', response);
-          this.router.navigate(['/products']);
+          this.router.navigate(['/listar']);
         },
         error: error => {
           console.error('Login failed', error);
