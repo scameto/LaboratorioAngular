@@ -7,14 +7,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-<<<<<<< HEAD
-import { HttpClientModule } from '@angular/common/http';
+
 import { RegisterComponent } from './register/register.component';
-=======
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductListComponent } from './product-list/product-list.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
->>>>>>> Santino
 
 @NgModule({
   declarations: [
