@@ -11,25 +11,13 @@ import { HttpClient } from '@angular/common/http';
 export class ProductListComponent {
 
   token: any = '';
-  productos: any[] = [];
+  productos: Product[] = [];
   constructor(private productService: ProductService, private http:HttpClient) {}
 
   ngOnInit(){
-    //this.obtenerToken();
     this.loadProductos();
 
   }
-
-/*   obtenerToken() {
-    // Obtener el token del localStorage
-    this.token = localStorage.getItem('token');
-
-    if (this.token) {
-      console.log('Token obtenido:', this.token);
-    } else {
-      console.error('No se encontró ningún token en el localStorage.');
-    }
-  } */
 
   loadProductos(): void {
     this.productService.getProductos().subscribe(

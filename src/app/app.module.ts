@@ -10,12 +10,18 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductListComponent } from './product-list/product-list.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
+import { ProductCardComponent } from './product-card/product-card.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProductListComponent,
+    ProductCardComponent,
+    CarritoComponent,
+    CuentaComponent,
   ],
   imports: [
     BrowserModule,

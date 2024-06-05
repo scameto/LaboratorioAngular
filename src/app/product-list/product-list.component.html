@@ -1,24 +1,33 @@
-<div class="container mt-4">
-  <table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-      <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <!--<th>Imagen</th> -->
-        <th>Precio</th>
-        <!-- Puedes agregar más columnas según las propiedades de tus productos -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let producto of productos">
-        <td>{{ producto.id }}</td>
-        <td>{{ producto.nombre }}</td>
-        <td>{{ producto.descripcion }}</td>
-        <!--<td><img [src]="decodeBase64(producto.imagen)" alt="Imagen del producto" class="img-thumbnail" style="max-width: 100px;"></td> -->
-        <td>{{ producto.precio }}</td>
-        <!-- Ajusta las propiedades según la estructura de tus productos -->
-      </tr>
-    </tbody>
-  </table>
+<!-- src/app/product-list/product-list.component.html -->
+<div class="container-fluid mt-1">
+  <div class="row">
+    <!-- Navbar a la izquierda del todo -->
+    <div class="col-md-2">
+      <nav class="navbar navbar-expand-md navbar-custom flex-column align-items-center vh-100">
+        <span class="navbar-breand">Panadería</span>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/productos" routerLinkActive="active" aria-current="page">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/carrito" routerLinkActive="active">Carrito</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/cuenta" routerLinkActive="active">Cuenta</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    
+    <!-- Lista de productos a la derecha -->
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let product of productos">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

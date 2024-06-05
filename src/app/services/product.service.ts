@@ -13,12 +13,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProductos(): Observable<any> {
-   /*  const headers = new HttpHeaders({
-      'authorization': token
-    });
- */
     return this.http.get(`${this.apiUrl}/`);
   }
 
-  
 }

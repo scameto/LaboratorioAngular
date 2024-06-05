@@ -1,0 +1,44 @@
+/* styles.css o product-list.component.css */
+.navbar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 16.6667%;
+    padding-top: 20px;
+    z-index: 1000;
+    padding-left: 10px;
+  }
+  
+.container-fluid.mt-4 {
+    margin-left: 16.6667%;
+}
+
+
+.navbar-custom {
+    background-color: #d2b48c;
+}
+
+.navbar-custom span{
+    font-size: 40px;
+}
+  
+/* .navbar-custom .nav-link {
+    color: #ffffff; 
+} */
+  
+.navbar-custom .nav-link:hover {
+    color: #ffffff; 
+}
+
+.navbar-custom .nav-item{
+    margin: 5px;
+    font-size: 50px;
+    width: 100%;
+}
+
+.nav-link{
+    display: block;
+    text-align: center;
+}
+  
