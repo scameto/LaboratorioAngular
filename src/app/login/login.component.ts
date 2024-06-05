@@ -31,6 +31,8 @@ export class LoginComponent {
         next: response => {
           console.log('Response from server:', response);
           localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+        
           console.log('Login successful', response);
           this.router.navigate(['/listar']);
         },
