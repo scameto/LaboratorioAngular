@@ -4,7 +4,7 @@
     <!-- Navbar a la izquierda del todo -->
     <div class="col-md-2">
       <nav class="navbar navbar-expand-md navbar-custom flex-column align-items-center vh-100">
-        <span class="navbar-breand">Panadería</span>
+        <span class="navbar-brand">Panadería</span>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav flex-column">
             <li class="nav-item">
@@ -23,8 +23,8 @@
     
     <!-- Lista de productos a la derecha -->
     <div class="col-md-10">
-      <div class="row">
-        <div class="col-md-4" *ngFor="let product of productos">
+      <div class="d-flex flex-wrap justify-content-center">
+        <div class="col-md-4 mb-4 p-5 justify-content-center" *ngFor="let product of productos">
           <app-product-card [product]="product"></app-product-card>
         </div>
       </div>

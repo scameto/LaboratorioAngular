@@ -13,6 +13,7 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
+import { CuentaService } from './services/cuenta.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CuentaComponent } from './cuenta/cuenta.component';
   ],
   providers: [UserService,
               ProductService,
+              CuentaService,
               {provide: HTTP_INTERCEPTORS,
                 useClass: AuthInterceptor,
                 multi: true 

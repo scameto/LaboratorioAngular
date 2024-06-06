@@ -1,6 +1,25 @@
 
 .card-img-top {
-    height: 200px;
-    object-fit: cover;
-  }
+  height: 200px;
+  object-fit: cover;
+}
+
+.card {
+  background-color: #6D3D14;
+  color: #ffffff;
+}
+
+.img-container {
+  padding: 10px; /* Ajusta el padding según sea necesario */
+}
+  
+.img-container img {
+  border-radius: 5px; /* Opcional: Añade bordes redondeados a la imagen */
+}
+  
+.btn-primary.float-end {
+    background-color: #E08700; /* Color de fondo */
+    border-color: #E08700;     /* Color del borde */
+    color: black;
+}
   
