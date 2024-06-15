@@ -1,0 +1,24 @@
+<!-- src/app/update-product/update-product.component.html -->
+<div class="container mt-4">
+    <h2>Actualizar Producto</h2>
+    <form [formGroup]="updateProductForm">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre">
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" class="form-control" id="precio" formControlName="precio">
+      </div>
+      <div class="mb-3">
+        <label for="imagen" class="form-label">Imagen</label>
+        <input type="file" class="form-control" id="imagen" (change)="onFileSelected($event)">
+      </div>
+      <button type="button" class="btn btn-primary" (click)="onSave()">Guardar</button>
+    </form>
+  </div>
+  

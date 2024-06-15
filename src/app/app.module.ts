@@ -17,7 +17,7 @@ import { CarritoComponent } from './carrito/carrito.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreateProductComponent } from './create-product/create-product.component';
-
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
     CuentaComponent,
     NavbarComponent,
     CreateProductComponent,
+    UpdateProductComponent,
  
   ],
   imports: [

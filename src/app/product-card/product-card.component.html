@@ -9,8 +9,9 @@
     <div class="d-flex justify-content-between align-items-center">
       <span>{{ product.precio | currency }}</span>
       <div>
-        <button class="btn btn-danger m2" *ngIf="isAuthenticated() && isAdmin()" (click)="onEliminar()">Eliminar</button>
-        <button class="btn btn-primary float-end" (click)="onPedir()  ">Pedir</button>
+        <button class="btn btn-danger me-2" *ngIf="isAuthenticated() && isAdmin()" (click)="onEliminar()">Eliminar</button>
+        <a class="btn btn-warning me-2" *ngIf="isAuthenticated() && isAdmin()" [routerLink]="['/update', product.id]">Actualizar</a>
+        <button class="btn btn-success me-2" (click)="onPedir()">Pedir</button>
       </div>
     </div>
   </div>

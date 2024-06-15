@@ -6,6 +6,7 @@ import { CarritoComponent } from "./carrito/carrito.component";
 import { CuentaComponent } from "./cuenta/cuenta.component";
 import { RegisterComponent} from "./register/register.component";
 import { CreateProductComponent } from "./create-product/create-product.component";
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'carrito', component: CarritoComponent },
   { path: 'cuenta', component: CuentaComponent },
   { path: 'producto', component: CreateProductComponent },
+  { path: 'update/:id', component: UpdateProductComponent },
   
   { path: 'register', component: RegisterComponent}  
 ];
