@@ -20,6 +20,8 @@ export class LoginComponent {
       this.userService.login({ email: this.email, password: this.password }).subscribe({
         next: response => {
           console.log('Response from server:', response);
+          localStorage.setItem('telefono', response.telefono);
+          localStorage.setItem('emailU', response.nombre);
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
         

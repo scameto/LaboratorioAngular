@@ -15,8 +15,8 @@ import { AuthInterceptor } from './services/auth-interceptor.service';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
-import { CuentaService } from './services/cuenta.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 
 @NgModule({
@@ -29,6 +29,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     CarritoComponent,
     CuentaComponent,
     NavbarComponent,
+    CreateProductComponent,
  
   ],
   imports: [
@@ -41,7 +42,6 @@ import { NavbarComponent } from './navbar/navbar.component';
   ],
   providers: [UserService,
               ProductService,
-              CuentaService,
               {provide: HTTP_INTERCEPTORS,
                 useClass: AuthInterceptor,
                 multi: true 

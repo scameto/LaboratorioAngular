@@ -8,11 +8,17 @@
         <li class="nav-item" *ngIf="isAuthenticated() && isUser()">
             <a class="nav-link" routerLink="/listar">Productos</a>
         </li>
+        <li class="nav-item" *ngIf="isAuthenticated() && isUser()">
+          <a class="nav-link" routerLink="/carrito">Carrito</a>
+        </li>
         <li class="nav-item" *ngIf="isAuthenticated() && isPanadero()">
           <a class="nav-link" routerLink="/pedidos">Pedidos</a>
         </li>
       </ul>
       <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="isAuthenticated() && isUser()">
+          <a class="nav-link" routerLink="/cuenta">Cuenta</a>
+        </li>
         <li class="nav-item" *ngIf="!isAuthenticated()">
           <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
         </li>

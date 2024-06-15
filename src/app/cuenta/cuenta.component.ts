@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CuentaService } from '../services/cuenta.service';
+import { UserService } from '../services/user.service';
 import { Usuario } from '../models/usuario';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,22 +9,16 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './cuenta.component.scss'
 })
 export class CuentaComponent {
-  token: any = '';
-  usuario: Usuario | null = null; 
+  email = localStorage.getItem('emailU');
+  telefono = localStorage.getItem('telefono');
+  role = localStorage.getItem('role');
 
-  constructor(private cuentaService: CuentaService, private http:HttpClient) {}
 
-  ngOnInit(){
-    //this.loadUsuario();
+  constructor(private userService: UserService, private http:HttpClient) {}
+
+  ngOnInit(): void {
+    console.log(this.email);
+    console.log(this.telefono);
+    console.log(this.role);
   }
-
-  /* loadUsuario(){
-    this.cuentaService.getUsuario().subscribe((data:any) => {
-      this.usuario = data;
-      console.log(data);
-    },
-    (error) => {
-      console.error('Error al traer al usuario',error)
-    })
-  } */
 }

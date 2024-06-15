@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
 //import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  usuario: Usuario | null = null; 
+
   private apiUrl = `http://localhost:3000/usuarios`;
 
   constructor(private http: HttpClient) { }
@@ -40,12 +44,11 @@ export class UserService {
   disableUser(userId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/disable-user`, { id: userId });
   }
-  
-  // Obtener perfil del usuario actual
-  getUserProfile(): Observable<any> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get(`${this.apiUrl}/profile`, { headers });
+
+  getUser(){
+    const email = localStorage.getItem('emailU');
+    const telefono = localStorage.getItem('telefono');
+    const role = localStorage.getItem('role');
+
   }
 }

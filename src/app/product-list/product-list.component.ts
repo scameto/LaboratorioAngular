@@ -10,7 +10,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductListComponent {
 
-  token: any = '';
   productos: Product[] = [];
   constructor(private productService: ProductService, private http:HttpClient) {}
 
