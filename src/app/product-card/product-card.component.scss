@@ -1,6 +1,7 @@
 /* Define el estilo de la imagen en la tarjeta */
 .card{
   width: 400px;
+  height: 400px;
 }
 
 .card-img-top {
@@ -23,14 +24,14 @@
 .img-container {
   padding: 10px; /* Ajusta el padding según sea necesario */
   width: 100%;
-  height: auto;
+  max-height: 300px;
 }
 
 /* Estilo de la imagen dentro del contenedor */
 .img-container img {
   border-radius: 5px; /* Añade bordes redondeados a la imagen */
   width: 100%; /* Asegura que la imagen tome el 100% del contenedor */
-  height: auto; /* Ajusta la altura automáticamente para mantener la proporción */
+  max-height: 240px;
 }
 
 /* Estilo del botón */
