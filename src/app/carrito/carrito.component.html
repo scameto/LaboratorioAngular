@@ -1,1 +1,45 @@
-<p>carrito works!</p>
+<div class="container mt-5">
+    <div class="row justify-content-end">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="text-center">Carrito de Compras</h3>
+          </div>
+          <div class="card-body" *ngIf="(articulosCarrito$ | async)?.length; else carritoVacio">
+            <div *ngFor="let articulo of articulosCarrito$ | async" class="cart-item">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <img [src]="articulo.producto.imagen" alt="Imagen del producto" style="width: 50px; height: 50px;">
+                </div>
+                <div>
+                  <h5>{{ articulo.producto.nombre }}</h5>
+                  <p>{{ articulo.producto.descripcion }}</p>
+                  <span>{{ articulo.producto.precio | currency }}</span>
+                </div>
+                <div>
+                  <button class="btn btn-secondary" (click)="onDisminuirCantidad(articulo)">-</button>
+                  <span class="mx-2">{{ articulo.cantidad }}</span>
+                  <button class="btn btn-secondary" (click)="onAumentarCantidad(articulo)">+</button>
+                  <button class="btn btn-danger ms-2" (click)="onEliminar(articulo.producto)">Eliminar</button>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <h4>Total: {{ totalCarrito | currency }}</h4>
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+              <button class="btn btn-primary" (click)="finalizarPedido()">Finalizar Pedido</button>
+            </div>
+            <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+            <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+          </div>
+          <ng-template #carritoVacio>
+            <div class="text-center">
+              <p>El carrito está vacío.</p>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  

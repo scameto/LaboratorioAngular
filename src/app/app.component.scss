@@ -8,3 +8,30 @@
     background-position: center center;
   }
   
+  // Estilos para dispositivos móviles
+@media (max-width: 767.98px) {
+  .card {
+    max-width: 100%;
+    margin: 10px;
+  }
+  .img-container img {
+    max-height: 150px;
+  }
+  .card-header h3 {
+    font-size: 1.5rem;
+  }
+}
+
+// Estilos para tablets
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .card {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  .img-container img {
+    max-height: 200px;
+  }
+  .card-header h3 {
+    font-size: 1.75rem;
+  }
+}

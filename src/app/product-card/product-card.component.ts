@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { AuthService } from '../services/auth.service';
+import { CarritoService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-card',
@@ -13,13 +14,13 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product!: Product;
 
-  constructor(private productService: ProductService,private authService: AuthService) { }
+  constructor(private productService: ProductService,private authService: AuthService, private cartService: CarritoService) { }
 
   ngOnInit(): void {
   }
 
   onPedir(): void {
-    // Aquí puedes manejar la lógica cuando se hace clic en el botón "Pedir"
+    this.cartService.agregarAlCarrito(this.product);
     console.log(`Pedido realizado para el producto: ${this.product.nombre}`);
   }
 
