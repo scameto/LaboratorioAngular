@@ -14,8 +14,8 @@ export class ProductListComponent {
   constructor(private productService: ProductService, private http:HttpClient) {}
 
   ngOnInit(){
+    
     this.loadProductos();
-
   }
 
   loadProductos(): void {

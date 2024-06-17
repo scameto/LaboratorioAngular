@@ -1,20 +1,18 @@
 <!-- src/app/product-card/product-card.component.html -->
-<div class="card mb-4 shadow-sm">
+<div class="card mb-4 shadow-sm d-flex flex-column">
   <div class="img-container">
     <img [src]="product.imagen" alt="Imagen del producto" />
   </div>
-  <div class="card-body">
+  <div class="card-body d-flex flex-column flex-grow-1">
     <h5 class="card-title">{{ product.nombre }}</h5>
     <p class="card-text">{{ product.descripcion }}</p>
-    <div class="d-flex justify-content-between align-items-center">
+    <div class="mt-auto d-flex justify-content-between align-items-center">
       <span>{{ product.precio | currency }}</span>
-      <div>
+      <div class="button-container">
         <button class="btn btn-danger me-2" *ngIf="isAuthenticated() && isAdmin()" (click)="onEliminar()">Eliminar</button>
-        <a class="btn btn-warning me-2" *ngIf="isAuthenticated() && isAdmin()" [routerLink]="['/update', product.id]">Actualizar</a>
-        <button class="btn btn-success me-2" (click)="onPedir()">Pedir</button>
+        <a class="btn btn-warning me-2" *ngIf="isAuthenticated() && isAdmin()" [routerLink]="['/producto/update', product.id]">Actualizar</a>
+        <button class="btn btn-success" (click)="onPedir()">Pedir</button>
       </div>
     </div>
   </div>
 </div>
-
-  

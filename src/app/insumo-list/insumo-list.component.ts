@@ -24,13 +24,13 @@ export class InsumoListComponent implements OnInit {
       this.insumoService.deleteInsumo(id).subscribe(
         () => {
           console.log('Insumo eliminado');
-          // Aquí puedes añadir lógica para actualizar la lista de productos en el componente padre
         },
         (error) => {
           console.error('Error al eliminar el insumo', error);
         }
       );
     }
+    window.location.reload();
   }
 
   isAuthenticated(): boolean {

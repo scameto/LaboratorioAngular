@@ -27,4 +27,8 @@ export class NavbarComponent {
   isPanadero(): boolean {
     return this.authService.getUserRole() === 'PANADERO';
   }
+
+  isAdmin(): boolean {
+    return this.authService.getUserRole() === 'ADMIN';
+  }
 }

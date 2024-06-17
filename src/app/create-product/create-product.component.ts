@@ -29,7 +29,7 @@ export class CreateProductComponent {
 
   onSubmit() {
     this.productService.createProduct(this.product).subscribe(() => {
-      this.router.navigate(['/productos']);
+      this.router.navigate(['/productos/listar']);
     });
   }
 }

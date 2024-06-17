@@ -26,7 +26,7 @@ export class LoginComponent {
           localStorage.setItem('role', response.role);
         
           console.log('Login successful', response);
-          this.router.navigate(['/listar']);
+          this.router.navigate(['/productos/listar']);
         },
         error: error => {
           console.error('Login failed', error);

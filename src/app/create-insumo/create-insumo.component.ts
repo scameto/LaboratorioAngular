@@ -20,7 +20,7 @@ export class CreateInsumoComponent {
 
   createInsumo(): void {
     this.insumoService.createInsumo(this.newInsumo).subscribe(() => {
-      this.router.navigate(['/listar/insumos']);
+      this.router.navigate(['/insumos/listar']);
     });
   }
 }

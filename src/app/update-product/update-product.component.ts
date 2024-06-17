@@ -57,16 +57,16 @@ export class UpdateProductComponent implements OnInit {
         reader.onload = () => {
           updatedProduct.imagen = reader.result as string;
           this.productService.updateProducto(updatedProduct).subscribe(() => {
-            this.router.navigate(['/']);
+            //this.router.navigate(['/']);
           });
         };
         reader.readAsDataURL(this.selectedFile);
       } else {
         this.productService.updateProducto(updatedProduct).subscribe(() => {
-          this.router.navigate(['/']);
+          //this.router.navigate(['/']);
         });
       }
-
+      this.router.navigate(['/productos/listar']);
     }
     else{
       console.warn('this.product es null o undefined');

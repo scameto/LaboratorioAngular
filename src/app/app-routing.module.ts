@@ -13,13 +13,13 @@ import { CreateInsumoComponent } from "./create-insumo/create-insumo.component";
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'listar', component: ProductListComponent},
+  { path: 'productos/listar', component: ProductListComponent},
   { path: 'carrito', component: CarritoComponent },
   { path: 'cuenta', component: CuentaComponent },
-  { path: 'producto', component: CreateProductComponent },
-  { path: 'update/:id', component: UpdateProductComponent },
-  { path: 'listar/insumos', component: InsumoListComponent },
-  { path: 'crear/insumo', component:  CreateInsumoComponent},
+  { path: 'producto/crear', component: CreateProductComponent },
+  { path: 'producto/update/:id', component: UpdateProductComponent },
+  { path: 'insumos/listar', component: InsumoListComponent },
+  { path: 'insumo/crear', component:  CreateInsumoComponent},
   
   { path: 'register', component: RegisterComponent}  
 ];

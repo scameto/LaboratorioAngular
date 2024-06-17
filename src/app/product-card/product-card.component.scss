@@ -1,17 +1,11 @@
 /* Define el estilo de la imagen en la tarjeta */
-.card{
-  width: 400px;
-  height: 400px;
+.card {
+  height: 100%; /* Ajusta la altura de la card según el contenido */
 }
 
 .card-img-top {
   height: 200px;
   object-fit: cover; /* Ajusta la imagen para cubrir el área asignada sin distorsión */
-}
-
-/* Establece el ancho fijo de la tarjeta */
-.product-card {
-  width: 300px; /* Ajusta este valor al ancho deseado */
 }
 
 /* Define el color de fondo y el color del texto de la tarjeta */

@@ -28,7 +28,7 @@ export class ProductCardComponent implements OnInit {
       this.productService.deleteProduct(this.product.id).subscribe(
         () => {
           console.log('Producto eliminado');
-          // Aquí puedes añadir lógica para actualizar la lista de productos en el componente padre
+          window.location.reload();
         },
         (error) => {
           console.error('Error al eliminar el producto', error);
