@@ -16,8 +16,13 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
 import { CreateProductComponent } from './create-product/create-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
+
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
+
 
 @NgModule({
   declarations: [
@@ -39,7 +44,8 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ForgotPasswordComponent,
   ],
   providers: [UserService,
               ProductService,
