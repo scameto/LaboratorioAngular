@@ -21,6 +21,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { UpdateProductComponent } from './update-product/update-product.component';
 
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 
@@ -36,6 +37,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     NavbarComponent,
     CreateProductComponent,
     UpdateProductComponent,
+    
  
   ],
   imports: [
@@ -46,6 +48,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     RouterModule,
     ReactiveFormsModule,
     ForgotPasswordComponent,
+    ChangePasswordComponent,
   ],
   providers: [UserService,
               ProductService,

@@ -5,28 +5,24 @@ import { ProductListComponent } from "./product-list/product-list.component";
 import { CarritoComponent } from "./carrito/carrito.component";
 import { CuentaComponent } from "./cuenta/cuenta.component";
 import { RegisterComponent} from "./register/register.component";
-
 import { CreateProductComponent } from "./create-product/create-product.component";
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
+import { ChangePasswordComponent } from './change-password/change-password.component'; 
 
-import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";    
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'listar', component: ProductListComponent},
-
   { path: 'carrito', component: CarritoComponent },
   { path: 'cuenta', component: CuentaComponent },
   { path: 'producto', component: CreateProductComponent },
-  { path: 'update/:id', component: UpdateProductComponent },
-  
-  { path: 'register', component: RegisterComponent}  
-
-  
+  { path: 'update/:id', component: UpdateProductComponent },  
+  { path: 'register', component: RegisterComponent},    
   { path: 'forgot-password', component: ForgotPasswordComponent},
-
+  { path: 'change-password', component: ChangePasswordComponent },
 
 ];
 
