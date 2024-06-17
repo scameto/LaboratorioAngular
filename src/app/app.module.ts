@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductListComponent } from './product-list/product-list.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ForgotPasswordComponent,
   ],
   providers: [UserService,
               ProductService,

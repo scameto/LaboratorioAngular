@@ -28,7 +28,7 @@ export class UserService {
 
   // Recuperación de contraseña de usuario
   forgotPassword(email: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/forgot-password`, email);
+    return this.http.post(`${this.apiUrl}/forgot-password`, {email});
   }
 
   // Habilitar usuario
