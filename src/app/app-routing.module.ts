@@ -7,6 +7,8 @@ import { CuentaComponent } from "./cuenta/cuenta.component";
 import { RegisterComponent} from "./register/register.component";
 import { CreateProductComponent } from "./create-product/create-product.component";
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { InsumoListComponent } from "./insumo-list/insumo-list.component";
+import { CreateInsumoComponent } from "./create-insumo/create-insumo.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'cuenta', component: CuentaComponent },
   { path: 'producto', component: CreateProductComponent },
   { path: 'update/:id', component: UpdateProductComponent },
+  { path: 'listar/insumos', component: InsumoListComponent },
+  { path: 'crear/insumo', component:  CreateInsumoComponent},
   
   { path: 'register', component: RegisterComponent}  
 ];

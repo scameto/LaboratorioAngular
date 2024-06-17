@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
+import { InsumoService } from './services/insumo.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -18,6 +19,8 @@ import { CuentaComponent } from './cuenta/cuenta.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { InsumoListComponent } from './insumo-list/insumo-list.component';
+import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,8 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     NavbarComponent,
     CreateProductComponent,
     UpdateProductComponent,
+    InsumoListComponent,
+    CreateInsumoComponent,
  
   ],
   imports: [
@@ -43,6 +48,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
   ],
   providers: [UserService,
               ProductService,
+              InsumoService,
               {provide: HTTP_INTERCEPTORS,
                 useClass: AuthInterceptor,
                 multi: true 
