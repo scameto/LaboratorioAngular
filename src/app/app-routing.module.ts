@@ -9,6 +9,10 @@ import { CreateProductComponent } from "./create-product/create-product.componen
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { InsumoListComponent } from "./insumo-list/insumo-list.component";
 import { CreateInsumoComponent } from "./create-insumo/create-insumo.component";
+import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
+import { ChangePasswordComponent } from './change-password/change-password.component'; 
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
@@ -20,8 +24,10 @@ const routes: Routes = [
   { path: 'producto/update/:id', component: UpdateProductComponent },
   { path: 'insumos/listar', component: InsumoListComponent },
   { path: 'insumo/crear', component:  CreateInsumoComponent},
-  
-  { path: 'register', component: RegisterComponent}  
+  { path: 'register', component: RegisterComponent},  
+  { path: 'forgot-password', component: ForgotPasswordComponent},
+  { path: 'change-password', component: ChangePasswordComponent },
+
 ];
 
 @NgModule({

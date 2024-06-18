@@ -17,10 +17,15 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { NavbarComponent } from './navbar/navbar.component';
+
 import { CreateProductComponent } from './create-product/create-product.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { InsumoListComponent } from './insumo-list/insumo-list.component';
 import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+
+
 
 @NgModule({
   declarations: [
@@ -36,6 +41,7 @@ import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
     UpdateProductComponent,
     InsumoListComponent,
     CreateInsumoComponent,
+    
  
   ],
   imports: [
@@ -44,7 +50,9 @@ import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
     HttpClientModule,
     AppRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ForgotPasswordComponent,
+    ChangePasswordComponent,
   ],
   providers: [UserService,
               ProductService,
