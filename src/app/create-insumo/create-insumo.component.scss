@@ -1,0 +1,30 @@
+body {
+    color: white;
+}
+
+.container {
+    background-color: #6D3D14;  // Color de fondo primario
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #000000;  // Color del título
+}
+
+.form-group {
+    margin-bottom: 1rem;
+
+    label {
+        color: #ffffff;  // Color de las etiquetas
+    }
+}
+
+.btn-success {
+    background-color: #2B4162;  // Color del botón de enviar
+    border: none;
+    &:hover {
+        background-color: darken(#2B4162, 10%);  // Color del botón al pasar el cursor
+    }
+}

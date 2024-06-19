@@ -1,23 +1,11 @@
-/* Define el estilo de la imagen en la tarjeta */
 .card {
-  height: 100%; /* Ajusta la altura de la card según el contenido */
-}
-
-.card-img-top {
-  height: 200px;
-  object-fit: cover; /* Ajusta la imagen para cubrir el área asignada sin distorsión */
-}
-
-/* Define el color de fondo y el color del texto de la tarjeta */
-
-/* Estilo de las tarjetas de producto */
-.card {
+  height: 100%;
   background-color: #6D3D14;
   color: #ffffff;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
   min-width: 300px;
-
+  margin-top: 20px;
 }
 
 .card .card-img-top {
@@ -46,8 +34,8 @@
 }
 
 /* Estilo del botón */
-.btn-primary {
-  background-color: #E08700;
-  border-color: #E08700;
-  color: black;
+.btn.btn-success {
+  background-color: #2B4162;
+  border-color: #2B4162;
+  color:  #ffffff;
 }

@@ -13,10 +13,10 @@
       <tbody>
         <tr *ngFor="let insumo of insumos">
           <th scope="row">{{ insumo.id }}</th>
-          <td>{{ insumo.nombre }}</td>
-          <td>{{ insumo.descripcion }}</td>
-          <td>{{ insumo.unidad_medida }}</td>
-          <td><button class="btn btn-danger me-2" *ngIf="isAuthenticated() && isAdmin()" (click)="onEliminar(insumo.id)">Eliminar</button></td>
+          <td scope="row">{{ insumo.nombre }}</td>
+          <td scope="row">{{ insumo.descripcion }}</td>
+          <td scope="row">{{ insumo.unidad_medida }}</td>
+          <td scope="row"><button class="btn btn-danger me-2" *ngIf="isAuthenticated() && isAdmin()" (click)="onEliminar(insumo.id)">Eliminar</button></td>
         </tr>
       </tbody>
     </table>

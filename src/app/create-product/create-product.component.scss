@@ -1,0 +1,27 @@
+body {
+    color: white;
+}
+
+.container { 
+    background-color: #6D3D14;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #000000;
+}
+
+.form-label {
+    color: #ffffff; 
+}
+
+.btn-primary {
+    background-color: #2B4162;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: darken(#2B4162, 10%);
+}

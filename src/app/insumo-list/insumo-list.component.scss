@@ -1,0 +1,21 @@
+h2 {
+    color: #ffffff; 
+}
+
+.btn-danger:hover {
+    background-color: darken(red, 20%);
+}
+
+
+.btn-success {
+    background-color: #2B4162; 
+    border: none;
+    font-size: x-large;
+}
+
+.btn-success:hover {
+    background-color: darken(#2B4162, 10%);
+}
+.me-2 {
+    margin-right: 0.5rem;
+}
