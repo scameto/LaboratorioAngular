@@ -36,6 +36,7 @@ export class NavbarComponent {
     return this.authService.getUserRole() === 'PANADERO';
   }
 
+<<<<<<< Updated upstream
   isAdmin(): boolean {
     return this.authService.getUserRole() === 'ADMIN';
 =======
@@ -43,5 +44,6 @@ export class NavbarComponent {
     if (navbarNav.classList.contains('show')) {
       navbarNav.classList.remove('show');
     }
+>>>>>>> Stashed changes
   }
 }
