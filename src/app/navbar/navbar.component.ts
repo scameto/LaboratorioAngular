@@ -11,6 +11,8 @@ import { CarritoService } from '../services/cart.service';
 })
 export class NavbarComponent {
   totalArticulosCarrito = 0;
+  navbarOpen = false;
+
 
 
   constructor(private authService: AuthService, private router: Router, private carritoService: CarritoService) {
@@ -45,5 +47,8 @@ export class NavbarComponent {
       navbarNav.classList.remove('show');
       
     }
+  }
+  toggleNavbar() {
+    this.navbarOpen = !this.navbarOpen;
   }
 }

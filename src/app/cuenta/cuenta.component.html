@@ -8,8 +8,13 @@
           <div class="card-body" *ngIf="isAuthenticated(); else notAuthenticated">
             <p><strong>Email:</strong> {{ usuario?.email }}</p>
             <p><strong>Rol:</strong> {{ usuario?.role }}</p>
-            <p><strong>Teléfono:</strong> {{ usuario?.telefono }}</p>
-            <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+            <p><strong>Teléfono:</strong> {{ usuario?.telefono }}</p>   
+            <div>
+              <button class="btn btn-primary mt-3" routerLink="/mis-pedidos">Ver Mis Pedidos</button><br>
+              <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
+
+            </div>         
+            
           </div>
           <ng-template #notAuthenticated>
             <div class="text-center">

@@ -1,19 +1,16 @@
 <nav class="navbar navbar-expand-lg navbar-dark ">
     <a class="navbar-brand" href="#">MisPedidos</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+    aria-label="Toggle navigation" (click)="toggleNavbar()">
       <span class="navbar-toggler-icon">      
-        <li class="nav-item" *ngIf="!isAuthenticated()">
-          <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
-        </li>
-      </span>
       
+      </span>      
     </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav" #navbarNav>
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNav" [ngClass]="{ 'show': navbarOpen }" #navbarNav>
       <ul class="navbar-nav mx-auto">
         <li class="nav-item" *ngIf="isAuthenticated() && !isPanadero()">
             <a class="nav-link" routerLink="/listar">Productos</a>
-        </li>
-       
+        </li>       
         <li class="nav-item" *ngIf="isAuthenticated() && !isUser()">
           <a class="nav-link" routerLink="/pedidos">Pedidos</a>
         </li>
