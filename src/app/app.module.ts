@@ -24,6 +24,8 @@ import { InsumoListComponent } from './insumo-list/insumo-list.component';
 import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { AuthGuard } from './guards/auth.guard';  // Asegúrate de importar el guardián de autenticación
 
 
 
@@ -41,6 +43,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     UpdateProductComponent,
     InsumoListComponent,
     CreateInsumoComponent,
+    PedidosComponent,
     
  
   ],
@@ -54,13 +57,16 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ForgotPasswordComponent,
     ChangePasswordComponent,
   ],
-  providers: [UserService,
-              ProductService,
-              InsumoService,
-              {provide: HTTP_INTERCEPTORS,
-                useClass: AuthInterceptor,
-                multi: true 
-              }
+  providers: [
+    UserService,
+    ProductService,
+    AuthGuard,  
+    InsumoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true 
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -12,6 +12,7 @@ import { CreateInsumoComponent } from "./create-insumo/create-insumo.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { ChangePasswordComponent } from './change-password/change-password.component'; 
 import { AuthGuard } from './guards/auth.guard';
+import { PedidosComponent } from "./pedidos/pedidos.component";
 
 
 
@@ -27,8 +28,10 @@ const routes: Routes = [
   { path: 'insumo/crear', component:  CreateInsumoComponent},
   { path: 'register', component: RegisterComponent},  
   { path: 'forgot-password', component: ForgotPasswordComponent},
-  { path: 'change-password', component: ChangePasswordComponent },
-  { path: '**', redirectTo: 'productos/listar' } ,
+  { path: 'change-password', component: ChangePasswordComponent },  
+  { path: 'pedidos', component: PedidosComponent, canActivate: [AuthGuard] },  // Verifica la ruta aquí
+  { path: '**', redirectTo: 'productos/listar' },
+
 
 
 ];

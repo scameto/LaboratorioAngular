@@ -1,48 +1,65 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-interface ArticuloCarrito {
-  producto: any;
-  cantidad: number;
-}
-
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoService {
-  private articulosCarrito: ArticuloCarrito[] = [];
-  private carritoSubject = new BehaviorSubject<ArticuloCarrito[]>([]);
-
+  private carritoSubject = new BehaviorSubject<any[]>([]);
   carrito$ = this.carritoSubject.asObservable();
 
   agregarAlCarrito(producto: any) {
-    const articuloExistente = this.articulosCarrito.find(item => item.producto.id === producto.id);
-    if (articuloExistente) {
-      articuloExistente.cantidad++;
+    const carrito = this.carritoSubject.getValue();
+    const productoExistente = carrito.find(item => item.producto.id === producto.id);
+
+    if (productoExistente) {
+      productoExistente.cantidad += 1;
     } else {
-      this.articulosCarrito.push({ producto, cantidad: 1 });
+      carrito.push({ producto, cantidad: 1 });
     }
-    this.carritoSubject.next(this.articulosCarrito);
+
+    this.carritoSubject.next(carrito);
+    this.actualizarLocalStorage();
   }
 
   eliminarDelCarrito(producto: any) {
-    const indiceArticulo = this.articulosCarrito.findIndex(item => item.producto.id === producto.id);
-    if (indiceArticulo > -1) {
-      this.articulosCarrito.splice(indiceArticulo, 1);
-      this.carritoSubject.next(this.articulosCarrito);
+    const carrito = this.carritoSubject.getValue();
+    const index = carrito.findIndex(item => item.producto.id === producto.id);
+
+    if (index !== -1) {
+      carrito.splice(index, 1);
+      this.carritoSubject.next(carrito);
+      this.actualizarLocalStorage();
     }
   }
 
   actualizarCantidad(producto: any, cantidad: number) {
-    const articuloExistente = this.articulosCarrito.find(item => item.producto.id === producto.id);
-    if (articuloExistente) {
-      articuloExistente.cantidad = cantidad;
-      this.carritoSubject.next(this.articulosCarrito);
+    const carrito = this.carritoSubject.getValue();
+    const productoExistente = carrito.find(item => item.producto.id === producto.id);
+
+    if (productoExistente) {
+      productoExistente.cantidad = cantidad;
+      this.carritoSubject.next(carrito);
+      this.actualizarLocalStorage();
     }
   }
 
   limpiarCarrito() {
-    this.articulosCarrito = [];
-    this.carritoSubject.next(this.articulosCarrito);
+    this.carritoSubject.next([]);
+    this.actualizarLocalStorage();
+  }
+
+  getCarrito() {
+    return this.carritoSubject.getValue();
+  }
+
+  private actualizarLocalStorage() {
+    localStorage.setItem('carrito', JSON.stringify(this.carritoSubject.getValue()));
+  }
+
+  guardarPedido(pedido: any) {
+    const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    pedidos.push(pedido);
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
   }
 }

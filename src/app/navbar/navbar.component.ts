@@ -43,6 +43,7 @@ export class NavbarComponent {
   collapseNavbar(navbarNav: HTMLElement): void {
     if (navbarNav.classList.contains('show')) {
       navbarNav.classList.remove('show');
+      
     }
   }
 }
