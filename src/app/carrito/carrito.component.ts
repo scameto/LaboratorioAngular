@@ -39,7 +39,8 @@ export class CarritoComponent {
       fechaPedido,
       fechaRetiro: this.fechaRetiro,
       articulos: this.carritoService.getCarrito(),
-      total: this.totalCarrito
+      total: this.totalCarrito,
+      estado: 'pendiente',
     };
 
     // Guardar el pedido en localStorage

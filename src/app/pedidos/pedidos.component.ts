@@ -21,9 +21,8 @@ export class PedidosComponent implements OnInit {
     this.pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
   }
 
-  actualizarEstado(pedido: any, nuevoEstado: string) {
+  actualizarEstado(pedido: any, nuevoEstado: string): void {
     pedido.estado = nuevoEstado;
-    this.pedidoService.actualizarPedido(pedido); // Asegúrate de tener un método para actualizar el pedido
+    this.pedidoService.actualizarPedido(pedido); 
   }
 }
-

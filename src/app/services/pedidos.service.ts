@@ -8,7 +8,7 @@ export class PedidoService {
     return JSON.parse(localStorage.getItem('pedidos') || '[]');
   }
 
-  actualizarPedido(pedidoActualizado: any) {
+  actualizarPedido(pedidoActualizado: any): void {
     const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
     const index = pedidos.findIndex((pedido: any) => pedido.fechaPedido === pedidoActualizado.fechaPedido && pedido.fechaRetiro === pedidoActualizado.fechaRetiro);
     if (index !== -1) {
