@@ -30,8 +30,8 @@ export class ProductListComponent {
     );
   }
 
-  decodeBase64(base64String: string): string {
-    return atob(base64String);
-  }
+   decodeBase64(base64String: string): string {
+     return atob(base64String);
+   }
 
 }

@@ -8,6 +8,10 @@
     font-family: 'Roboto', sans-serif;
  }
 .navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
     background-color: #E08700;
     
 }

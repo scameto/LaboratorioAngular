@@ -36,14 +36,13 @@ export class NavbarComponent {
     return this.authService.getUserRole() === 'PANADERO';
   }
 
-<<<<<<< Updated upstream
   isAdmin(): boolean {
     return this.authService.getUserRole() === 'ADMIN';
-=======
+ 
+  }
   collapseNavbar(navbarNav: HTMLElement): void {
     if (navbarNav.classList.contains('show')) {
       navbarNav.classList.remove('show');
     }
->>>>>>> Stashed changes
   }
 }

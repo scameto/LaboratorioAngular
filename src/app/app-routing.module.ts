@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./login/login.component";
-import { NgModule } from "@angular/core";
+import { NgModule, inject } from "@angular/core";
 import { ProductListComponent } from "./product-list/product-list.component";
 import { CarritoComponent } from "./carrito/carrito.component";
 import { CuentaComponent } from "./cuenta/cuenta.component";
@@ -11,15 +11,16 @@ import { InsumoListComponent } from "./insumo-list/insumo-list.component";
 import { CreateInsumoComponent } from "./create-insumo/create-insumo.component";
 import { ForgotPasswordComponent } from "./forgot-password/forgot-password.component";
 import { ChangePasswordComponent } from './change-password/change-password.component'; 
+import { AuthGuard } from './guards/auth.guard';
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: 'productos/listar', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'productos/listar', component: ProductListComponent},
-  { path: 'carrito', component: CarritoComponent },
-  { path: 'cuenta', component: CuentaComponent },
+  { path: 'cuenta', component: CuentaComponent, canActivate: [() => inject(AuthGuard).canActivate()] },
+  { path: 'carrito', component: CarritoComponent, canActivate: [() => inject(AuthGuard).canActivate()] },
   { path: 'producto/crear', component: CreateProductComponent },
   { path: 'producto/update/:id', component: UpdateProductComponent },
   { path: 'insumos/listar', component: InsumoListComponent },
@@ -27,6 +28,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},  
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'change-password', component: ChangePasswordComponent },
+  { path: '**', redirectTo: 'productos/listar' } ,
+
 
 ];
 
