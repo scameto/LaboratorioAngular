@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Usuario } from '../models/usuario';
+import { Router } from '@angular/router';
 //import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class UserService {
 
   private apiUrl = `http://localhost:3000/usuarios`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   // Registro de nuevo usuario
   register(user: any): Observable<any> {
@@ -51,4 +52,30 @@ export class UserService {
     const role = localStorage.getItem('role');
 
   }
+  // Obtener usuario autenticado
+  getUsuarioAutenticado(): Usuario | null {
+    const email = localStorage.getItem('emailU');
+    const telefono = localStorage.getItem('telefono');
+    const role = localStorage.getItem('role');
+
+    if (email && telefono && role) {
+      return { email, telefono, role } as Usuario;
+    }
+    return null;
+  }
+
+  // Verificar si el usuario está autenticado
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('emailU');
+  }
+
+  // Cerrar sesión
+  logout(): void {
+    localStorage.removeItem('emailU');
+    localStorage.removeItem('telefono');
+    localStorage.removeItem('role');
+    this.router.navigate(['/login']);
+  }
+
+
 }
