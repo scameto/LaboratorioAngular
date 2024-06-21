@@ -64,6 +64,7 @@ export class UserService {
     return null;
   }
 
+
   // Verificar si el usuario está autenticado
   isAuthenticated(): boolean {
     return !!localStorage.getItem('emailU');

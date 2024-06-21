@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CarritoService } from '../services/cart.service';
+import { UserService } from '../services/user.service'; // Asegúrate de importar UserService
+
 
 @Component({
   selector: 'app-carrito',
@@ -13,7 +15,7 @@ export class CarritoComponent {
   error: string | null = null;
   fechaRetiro: string = '';
 
-  constructor(private carritoService: CarritoService) {
+  constructor(private carritoService: CarritoService, private userService: UserService) {
     this.articulosCarrito$.subscribe(items => {
       this.totalCarrito = items.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
     });
@@ -41,6 +43,8 @@ export class CarritoComponent {
       articulos: this.carritoService.getCarrito(),
       total: this.totalCarrito,
       estado: 'pendiente',
+      usuario: this.userService.getUsuarioAutenticado()
+
     };
 
     // Guardar el pedido en localStorage

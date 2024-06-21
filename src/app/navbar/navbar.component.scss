@@ -44,10 +44,15 @@
       background-color: rgba(0, 0, 0, 0.8);
       position: fixed;
       top: 56px;
+      //eft: 10px; /* Ajusta el valor para mover el menú hacia la izquierda */
+      width: calc(30% - 20px); /* Ajusta el ancho del menú */
       left: 70%;
-      width: 100%;
+      //width: 30%;
       height: 30%;
-      padding: 1rem;
+      padding: 2rem;
+      margin: 10px;
+      margin-right: 20px;
+      padding-right: 20px; 
     }
   
     .nav-link {
