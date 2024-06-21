@@ -12,7 +12,8 @@
     top: 0;
     width: 100%;
     z-index: 1000;    
-    background-color: #E08700;    
+    background-color: #E08700;
+        
 }
 .nav-item-barra{
     margin-right: 20px;
@@ -44,10 +45,8 @@
       background-color: rgba(0, 0, 0, 0.8);
       position: fixed;
       top: 56px;
-      //eft: 10px; /* Ajusta el valor para mover el menú hacia la izquierda */
-      width: calc(30% - 20px); /* Ajusta el ancho del menú */
-      left: 70%;
-      //width: 30%;
+      width: 220px; 
+      left: calc(100% - 240px);
       height: 30%;
       padding: 2rem;
       margin: 10px;
