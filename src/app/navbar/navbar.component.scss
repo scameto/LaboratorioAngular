@@ -1,7 +1,6 @@
  .navbar-brand{
     padding: 10;
     margin-left: 1em ;
-    margin-right: 1em;
     font-size: 1.5em;
     color: #6D3D14;
     font-weight: bold; 
@@ -12,9 +11,11 @@
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
-    background-color: #E08700;
-    
+    z-index: 1000;    
+    background-color: #E08700;    
+}
+.nav-item-barra{
+    margin-right: 20px;
 }
 
 .nav-link{
@@ -24,6 +25,7 @@
 
 .navbar-toggler {
     border: none;
+    margin-right: 20px;
   }
   
   .navbar-toggler-icon {
