@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class RegisterComponent {
   registerForm: FormGroup;
   submitted = false;
+  message: string | null = null;
+  error: string | null = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,12 +40,16 @@ export class RegisterComponent {
     this.userService.register(this.registerForm.value).subscribe(
       data => {
         console.log('User registered successfully!', data);
-        alert('Registro exitoso. Redirigiendo a la página de inicio de sesión.');
-        this.router.navigate(['/login']);
+        this.message = 'Registro exitoso. Redirigiendo a la página de inicio de sesión.';
+        this.error = null;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 3000);
       },
       error => {
         console.error('Error registering user', error);
-        alert('Error al registrar usuario. Por favor, inténtelo de nuevo.');
+        this.error = 'Error al registrar usuario. Por favor, inténtelo de nuevo.';
+        this.message = null;
       }
     );
   }
