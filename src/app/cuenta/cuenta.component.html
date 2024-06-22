@@ -9,15 +9,14 @@
             <p><strong>Email:</strong> {{ usuario?.email }}</p>
             <p><strong>Rol:</strong> {{ usuario?.role }}</p>
             <p><strong>Teléfono:</strong> {{ usuario?.telefono }}</p>   
-            <div>
-              <button class="btn btn-primary mt-3" routerLink="/mis-pedidos">Ver Mis Pedidos</button><br>
-              <button class="btn btn-danger" (click)="logout()">Cerrar Sesión</button>
-
-            </div>         
+            <div class="d-flex flex-column align-items-center ">
+              <button class="btn btn-primary mt-1" routerLink="/mis-pedidos">Ver Mis Pedidos</button>
+              <button class="btn btn-danger mt-1" (click)="logout()">Cerrar Sesión</button>
+            </div>    
             
           </div>
           <ng-template #notAuthenticated>
-            <div class="text-center">
+            <div class="text-center ">
               <a class="btn btn-primary" routerLink="/login">Iniciar Sesión</a>
               <a class="btn btn-secondary" routerLink="/carrito">Carrito</a>
             </div>
