@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PedidoService } from '../services/pedidos.service'; // Asegúrate de tener este servicio
+import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,20 +12,70 @@ import { PedidoService } from '../services/pedidos.service'; // Asegúrate de te
 })
 export class PedidosComponent implements OnInit {
   pedidos: any[] = [];
+  pedidosFiltrados: any[] = [];
+  usuario: any;
+  modoMisPedidos: boolean = false;
 
-  constructor(private pedidoService: PedidoService) {}
+
+  filtros = {
+    estado: '',
+    fechaDesde: '',
+    fechaHasta: '',
+    cliente: ''
+  };
+
+  constructor(
+    private pedidoService: PedidoService,
+    private userService: UserService,
+    private route: ActivatedRoute
+
+  ) {}
 
 
   ngOnInit() {
+    this.usuario = this.userService.getUsuarioAutenticado();
+    this.modoMisPedidos = this.route.snapshot.data['modo'] === 'mis-pedidos';
+
     this.cargarPedidos();
   }
 
   cargarPedidos() {
-    this.pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    this.pedidos = this.pedidoService.obtenerPedidos();
+    if (this.modoMisPedidos) {
+      this.pedidosFiltrados = this.pedidos.filter(p => p.usuario && p.usuario.email === this.usuario.email);
+    } else {
+      this.filtrarPedidos();
+    }
+  }
+
+  filtrarPedidos() {
+    this.pedidosFiltrados = this.pedidos.filter(pedido => {
+      const matchesEstado = this.filtros.estado ? pedido.estado === this.filtros.estado : true;
+      const matchesFechaDesde = this.filtros.fechaDesde ? new Date(pedido.fechaPedido) >= new Date(this.filtros.fechaDesde) : true;
+      const matchesFechaHasta = this.filtros.fechaHasta ? new Date(pedido.fechaPedido) <= new Date(this.filtros.fechaHasta) : true;
+      const matchesCliente = this.filtros.cliente ? pedido.usuario && pedido.usuario.email.includes(this.filtros.cliente) : true;
+      return matchesEstado && matchesFechaDesde && matchesFechaHasta && matchesCliente;
+    });
   }
 
   actualizarEstado(pedido: any, nuevoEstado: string): void {
     pedido.estado = nuevoEstado;
     this.pedidoService.actualizarPedido(pedido); 
+    this.cargarPedidos();
+  }
+  
+  limpiarFiltros() {
+    this.filtros = {
+      estado: '',
+      fechaDesde: '',
+      fechaHasta: '',
+      cliente: ''
+    };
+    this.cargarPedidos();
+  }
+
+  isUser(){
+    return this.userService.getUsuarioAutenticado()?.role === 'user' ;
+
   }
 }

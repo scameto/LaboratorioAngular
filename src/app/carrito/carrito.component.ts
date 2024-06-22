@@ -37,6 +37,22 @@ export class CarritoComponent {
 
   finalizarPedido() {
     const fechaPedido = new Date().toISOString().split('T')[0];
+    const fechaRetiroDate = new Date(this.fechaRetiro);
+    const fechaActualDate = new Date();
+    fechaActualDate.setHours(0, 0, 0, 0);
+
+    if (!this.fechaRetiro) {
+      this.error = 'La fecha de retiro es requerida.';
+      this.message = null;
+      return;
+    }
+
+    if (fechaRetiroDate <= fechaActualDate) {
+      this.error = 'La fecha de retiro debe ser mayor que la fecha actual.';
+      this.message = null;
+      return;
+    }
+
     const pedido = {
       fechaPedido,
       fechaRetiro: this.fechaRetiro,
@@ -44,7 +60,6 @@ export class CarritoComponent {
       total: this.totalCarrito,
       estado: 'pendiente',
       usuario: this.userService.getUsuarioAutenticado()
-
     };
 
     // Guardar el pedido en localStorage
