@@ -29,7 +29,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},  
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'change-password', component: ChangePasswordComponent },  
-  { path: 'pedidos', component: PedidosComponent, canActivate: [AuthGuard] },  // Verifica la ruta aquí
+  { path: 'pedidos', component: PedidosComponent, canActivate: [AuthGuard] }, 
+  { path: 'mis-pedidos', component: PedidosComponent, data: { modo: 'mis-pedidos' } },
   { path: '**', redirectTo: 'productos/listar' },
 
 
