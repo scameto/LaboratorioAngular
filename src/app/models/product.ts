@@ -7,6 +7,7 @@ export class Product {
   imagen: string;
   precio: number;
   productoInsumos: ProductoInsumo[];
+  Borrado: Boolean;
 
   constructor(id: number, nombre: string, descripcion: string, imagen: string, precio: number, productoInsumos: ProductoInsumo[]) {
     this.id = id;
@@ -15,5 +16,6 @@ export class Product {
     this.imagen = imagen;
     this.precio = precio;
     this.productoInsumos = productoInsumos;
+    this.Borrado = false;
   }
 }

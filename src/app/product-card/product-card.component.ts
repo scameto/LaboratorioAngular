@@ -38,6 +38,19 @@ export class ProductCardComponent implements OnInit {
     }
   }
 
+  onActivar() {
+    this.productService.activateProducto(this.product.id).subscribe(
+      (product: Product) => {
+        console.log('Producto activado:', product);
+        // Aquí puedes actualizar la interfaz o mostrar un mensaje de éxito
+      },
+      (error) => {
+        console.error('Error al activar el producto', error);
+        // Aquí puedes mostrar un mensaje de error
+      }
+    );
+  }
+
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }

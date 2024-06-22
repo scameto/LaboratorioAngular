@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Product } from '../models/product';
-
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,10 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}/`);
   }
 
+  getProductosActivos(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/activos`);
+  }
+
   getProductoById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
@@ -29,8 +32,11 @@ export class ProductService {
     return this.http.delete<Product>(`${this.apiUrl}/${id}`);
   }
 
+  activateProducto(id: number): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/activar/${id}`, {});
+  }
+
   updateProducto(product: Product): Observable<Product> {
     return this.http.put<Product>(`${this.apiUrl}/${product.id}`, product);
   }
-
 }
