@@ -10,12 +10,20 @@ h2 {
 .btn-success {
     background-color: #2B4162; 
     border: none;
-    font-size: x-large;
+    font-size:medium;
 }
 
 .btn-success:hover {
     background-color: darken(#2B4162, 10%);
+
 }
 .me-2 {
     margin-right: 0.5rem;
+}
+.container{
+    margin-top: 67px;
+   // background-color: #6D3D14;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
