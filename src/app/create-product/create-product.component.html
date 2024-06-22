@@ -1,24 +1,33 @@
-<!-- src/app/create-product/create-product.component.html -->
 <div class="container mt-4">
-    <h2>Crear Nuevo Producto</h2>
-    <form (ngSubmit)="onSubmit()" #productForm="ngForm">
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre del Producto</label>
-        <input type="text" id="nombre" class="form-control" required [(ngModel)]="product.nombre" name="nombre">
+  <h2>Crear Nuevo Producto</h2>
+  <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre del Producto</label>
+      <input type="text" id="nombre" class="form-control" required [(ngModel)]="product.nombre" name="nombre">
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea id="descripcion" class="form-control" required [(ngModel)]="product.descripcion" name="descripcion"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="imagen" class="form-label">Imagen</label>
+      <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)">
+    </div>
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio</label>
+      <input type="number" id="precio" class="form-control" required [(ngModel)]="product.precio" name="precio">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Insumos</label><br>
+      <div *ngFor="let insumo of product.productoInsumos; let i = index" class="input-group mb-2">
+        <select class="form-select" [(ngModel)]="insumo.insumoId" name="insumoId{{i}}" required>
+          <option *ngFor="let ins of insumos" [value]="ins.id">{{ins.nombre}}</option>
+        </select>
+        <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="insumo.cantidad" name="cantidad{{i}}" required>
+        <button type="button" class="btn btn-danger" (click)="removeInsumo(i)">Eliminar</button>
       </div>
-      <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción</label>
-        <textarea id="descripcion" class="form-control" required [(ngModel)]="product.descripcion" name="descripcion"></textarea>
-      </div>
-      <div class="mb-3">
-        <label for="imagen" class="form-label">Imagen</label>
-        <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)">
-      </div>
-      <div class="mb-3">
-        <label for="precio" class="form-label">Precio</label>
-        <input type="number" id="precio" class="form-control" required [(ngModel)]="product.precio" name="precio">
-      </div>
-      <button type="submit" class="btn btn-primary">Crear Producto</button>
-    </form>
-  </div>
-  
+      <button type="button" class="btn btn-secondary" (click)="addInsumo()">Agregar Insumo</button>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear Producto</button>
+  </form>
+</div>
