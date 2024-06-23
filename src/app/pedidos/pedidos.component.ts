@@ -3,6 +3,7 @@ import { PedidoService } from '../services/pedidos.service'; // Asegúrate de te
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { InsumoService } from '../services/insumo.service';
 
 
 @Component({
@@ -15,6 +16,9 @@ export class PedidosComponent implements OnInit {
   pedidosFiltrados: any[] = [];
   usuario: any;
   modoMisPedidos: boolean = false;
+  insumosVisibles: { [key: string]: boolean } = {};
+  insumos: any[] = [];
+
 
 
   filtros = {
@@ -27,7 +31,9 @@ export class PedidosComponent implements OnInit {
   constructor(
     private pedidoService: PedidoService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private insumoService: InsumoService,
+
 
   ) {}
 
@@ -35,7 +41,7 @@ export class PedidosComponent implements OnInit {
   ngOnInit() {
     this.usuario = this.userService.getUsuarioAutenticado();
     this.modoMisPedidos = this.route.snapshot.data['modo'] === 'mis-pedidos';
-
+    this.cargarInsumos();
     this.cargarPedidos();
   }
 
@@ -74,8 +80,47 @@ export class PedidosComponent implements OnInit {
     this.cargarPedidos();
   }
 
+  cargarInsumos() {
+    this.insumoService.getInsumos().subscribe(insumos => {
+      this.insumos = insumos;
+      //console.log(this.insumos); 
+
+    });
+  }
+
+  calcularInsumos(articulo: any) {
+    if (!articulo.producto.insumos || !Array.isArray(articulo.producto.insumos)) {
+      return [];
+    }
+    return articulo.producto.insumos.map((insumo: any) => {
+      const detalleInsumo = this.insumos.find(i => i.id === insumo.insumoId);
+      if (!detalleInsumo) {
+        console.error(`Insumo con ID ${insumo.insumoId} no encontrado.`);
+      }
+      return {
+        nombre: detalleInsumo ? detalleInsumo.nombre : 'Insumo desconocido',
+        unidad_medida: detalleInsumo ? detalleInsumo.unidad_medida : '',
+        cantidadTotal: insumo.cantidad * articulo.cantidad
+      };
+    });
+  }
+
+  toggleInsumos(pedidoId: number, articuloId: number) {
+    const key = `${pedidoId}-${articuloId}`;
+    this.insumosVisibles[key] = !this.insumosVisibles[key];
+  }
+
   isUser(){
     return this.userService.getUsuarioAutenticado()?.role === 'user' ;
 
   }
+
+  isAdmin() {
+    return this.userService.getUsuarioAutenticado()?.role === 'ADMIN';
+  }
+
+  isAuthenticated(){
+    return this.userService.isAuthenticated();
+  }
+
 }
