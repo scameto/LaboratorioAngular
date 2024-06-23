@@ -1,51 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Product } from '../models/product';
-import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  styleUrls: ['./product-list.component.scss']
 })
-export class ProductListComponent {
-
+export class ProductListComponent implements OnInit {
   productos: Product[] = [];
-  constructor(private authService: AuthService, private productService: ProductService, private http:HttpClient) {}
+  currentPage: number = 1;
+  pageSize: number = 6;
+  totalItems: number = 0;
+  totalPages: number = 0;
 
-  ngOnInit(){
-    
+  constructor(private productService: ProductService, private authService: AuthService) {}
+
+  ngOnInit(): void {
     this.loadProductos();
   }
 
   loadProductos(): void {
-    if(this.isAuthenticated() && this.isAdmin()){
-      this.productService.getProductos().subscribe(
-        (data: any[]) => {
-          this.productos = data;
-          console.log(data);
+    if (this.isAuthenticated() && this.isAdmin()) {
+      this.productService.getProductosPaginado(this.currentPage, this.pageSize).subscribe(
+        response => {
+          this.productos = response.productos;
+          this.totalItems = response.totalItems;
+          this.totalPages = Math.ceil(this.totalItems / this.pageSize);
         },
-        (error) => {
+        error => {
+          console.error('Error fetching products:', error);
+        }
+      );
+    } else {
+      this.productService.getProductosActivosPaginado(this.currentPage, this.pageSize).subscribe(
+        response => {
+          this.productos = response.productos;
+          this.totalItems = response.totalItems;
+          this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        },
+        error => {
           console.error('Error fetching products:', error);
         }
       );
     }
-    else{
-      this.productService.getProductosActivos().subscribe(
-        (data: any[]) => {
-          this.productos = data;
-          console.log(data);
-        },
-        (error) => {
-          console.error('Error fetching products:', error);
-        }
-      );
-    }
-  }
-
-  decodeBase64(base64String: string): string {
-    return atob(base64String);
   }
 
   isAuthenticated(): boolean {
@@ -62,7 +61,16 @@ export class ProductListComponent {
 
   isAdmin(): boolean {
     return this.authService.getUserRole() === 'ADMIN';
- 
   }
 
+  onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadProductos();
+    }
+  }
+
+  getPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
 }

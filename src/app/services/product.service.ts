@@ -16,8 +16,12 @@ export class ProductService {
     return this.http.get(`${this.apiUrl}/`);
   }
 
-  getProductosActivos(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/activos`);
+  getProductosPaginado(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/paginado?page=${page}&pageSize=${pageSize}`);
+  }
+
+  getProductosActivosPaginado(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/activos/paginado?page=${page}&pageSize=${pageSize}`);
   }
 
   getProductoById(id: number): Observable<Product> {

@@ -1,11 +1,28 @@
 <div class="container-fluid mt-5">
   <div class="row justify-content-center">
-    <div class="col-12 cards-container ">
-      <div class="row row-cols-1  row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-4">
+    <div class="col-12 cards-container">
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 g-4">
         <div class="col mb-4" *ngFor="let product of productos">
           <app-product-card [product]="product"></app-product-card>
         </div>
       </div>
     </div>
   </div>
+  <nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item" *ngFor="let page of getPagesArray()">
+        <a class="page-link" [class.active]="page === currentPage" (click)="onPageChange(page)">{{ page }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
 </div>
