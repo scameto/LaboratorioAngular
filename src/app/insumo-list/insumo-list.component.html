@@ -5,7 +5,7 @@
       <tr>
         <th scope="col">Id</th>
         <th scope="col">Nombre</th>
-        <th scope="col">Descripción</th>
+        <th scope="col" class="d-none d-md-table-cell">Descripción</th>
         <th scope="col">Unidad de Medida</th>
         <th scope="col"></th>
       </tr>
@@ -14,7 +14,7 @@
       <tr *ngFor="let insumo of insumos">
         <th scope="row">{{ insumo.id }}</th>
         <td>{{ insumo.nombre }}</td>
-        <td>{{ insumo.descripcion }}</td>
+        <td class="d-none d-md-table-cell">{{ insumo.descripcion }}</td>
         <td>{{ insumo.unidad_medida }}</td>
         <td>
           <button class="btn btn-danger me-2" *ngIf="isAuthenticated() && isAdmin()" (click)="onEliminar(insumo.id)">Eliminar</button>
