@@ -53,9 +53,9 @@
         </div>
         <div *ngIf="isAuthenticated() && !isUser()">
           <button class="btn btn-info mt-2" (click)="toggleInsumos(pedido.id, articulo.producto.id)">
-            {{ insumosVisibles[`${pedido.id}-${articulo.producto.id}`] ? 'Ocultar Insumos' : 'Mostrar Insumos' }}
+            {{ insumosVisibles[getInsumosKey(pedido.id, articulo.producto.id)] ? 'Ocultar Insumos' : 'Mostrar Insumos' }}
           </button>
-          <div *ngIf="insumosVisibles[`${pedido.id}-${articulo.producto.id}`]">
+          <div *ngIf="insumosVisibles[getInsumosKey(pedido.id, articulo.producto.id)]">
             <h6>Insumos necesarios:</h6>
             <table class="table table-striped">
               <thead>
@@ -73,11 +73,6 @@
                 </tr>
               </tbody>
             </table>
-            <!-- <ul>
-              <li *ngFor="let insumo of calcularInsumos(articulo)">
-                {{ insumo.nombre }}:  {{ insumo.cantidadTotal }} {{ insumo.unidad_medida }}
-              </li>
-            </ul> -->
           </div>
         </div>
       </div>

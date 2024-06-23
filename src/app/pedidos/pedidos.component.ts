@@ -106,8 +106,12 @@ export class PedidosComponent implements OnInit {
   }
 
   toggleInsumos(pedidoId: number, articuloId: number) {
-    const key = `${pedidoId}-${articuloId}`;
+    const key = this.getInsumosKey(pedidoId, articuloId);
     this.insumosVisibles[key] = !this.insumosVisibles[key];
+  }
+
+  getInsumosKey(pedidoId: number, articuloId: number): string {
+    return `${pedidoId}-${articuloId}`;
   }
 
   isUser(){
