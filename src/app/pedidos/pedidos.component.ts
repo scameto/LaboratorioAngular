@@ -115,7 +115,7 @@ export class PedidosComponent implements OnInit {
   }
 
   isUser(){
-    return this.userService.getUsuarioAutenticado()?.role === 'user' ;
+    return this.userService.getUsuarioAutenticado()?.role === 'USER' ;
 
   }
 
