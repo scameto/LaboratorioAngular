@@ -5,22 +5,15 @@
           <div class="card-header">
             <h3 class="text-center">Mi Cuenta</h3>
           </div>
-          <div class="card-body" *ngIf="isAuthenticated(); else notAuthenticated">
+          <div class="card-body" *ngIf="isAuthenticated()">
             <p><strong>Email:</strong> {{ usuario?.email }}</p>
             <p><strong>Rol:</strong> {{ usuario?.role }}</p>
             <p><strong>Teléfono:</strong> {{ usuario?.telefono }}</p>   
             <div class="d-flex flex-column align-items-center ">
               <button class="btn btn-primary mt-1" routerLink="/mis-pedidos">Ver Mis Pedidos</button>
-              <button class="btn btn-danger mt-1" (click)="logout()">Cerrar Sesión</button>
-            </div>    
-            
-          </div>
-          <ng-template #notAuthenticated>
-            <div class="text-center ">
-              <a class="btn btn-primary" routerLink="/login">Iniciar Sesión</a>
-              <a class="btn btn-secondary" routerLink="/carrito">Carrito</a>
-            </div>
-          </ng-template>
+              <!-- <button class="btn btn-danger mt-1" (click)="logout()">Cerrar Sesión</button> -->
+            </div>   
+          </div>          
         </div>
       </div>
     </div>

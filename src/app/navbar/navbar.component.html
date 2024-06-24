@@ -33,13 +33,13 @@
           </span>
         </a>
       </li>
-      <li class="nav-item-barra" *ngIf="isAuthenticated() && isUser()">
+      <li class="nav-item-barra" *ngIf="isAuthenticated() ">
         <a class="nav-link" routerLink="/cuenta" (click)="collapseNavbar(navbarNav)">Cuenta</a>
       </li>
       <li class="nav-item-barra" *ngIf="!isAuthenticated()">
         <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
       </li>
-      <li class="nav-item-barra" *ngIf="isAuthenticated() && !isUser()">
+      <li class="nav-item-barra" *ngIf="isAuthenticated() ">
         <a class="nav-link" href="#" (click)="logout()">Cerrar Sesión</a>
       </li>
     </ul>
