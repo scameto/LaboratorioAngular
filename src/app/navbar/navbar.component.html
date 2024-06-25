@@ -10,8 +10,11 @@
       <li class="nav-item" *ngIf="isAuthenticated()">
         <a class="nav-link" routerLink="/listar">Productos</a>
       </li>
-      <li class="nav-item" *ngIf="isAuthenticated()">
+      <li class="nav-item" *ngIf="isAuthenticated() && !isUser()">
         <a class="nav-link" routerLink="/pedidos">Pedidos</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated() && isUser()">
+        <a class="nav-link" routerLink="/mis-pedidos">Mis Pedidos</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated() && isAdmin()">
         <a class="nav-link" routerLink="/producto/crear">Crear producto</a>
@@ -30,13 +33,13 @@
           </span>
         </a>
       </li>
-      <li class="nav-item-barra" *ngIf="isAuthenticated() && isUser()">
+      <li class="nav-item-barra" *ngIf="isAuthenticated() ">
         <a class="nav-link" routerLink="/cuenta" (click)="collapseNavbar(navbarNav)">Cuenta</a>
       </li>
       <li class="nav-item-barra" *ngIf="!isAuthenticated()">
         <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
       </li>
-      <li class="nav-item-barra" *ngIf="isAuthenticated() && !isUser()">
+      <li class="nav-item-barra" *ngIf="isAuthenticated() ">
         <a class="nav-link" href="#" (click)="logout()">Cerrar Sesión</a>
       </li>
     </ul>
