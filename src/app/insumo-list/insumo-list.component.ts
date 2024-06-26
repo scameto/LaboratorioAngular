@@ -43,6 +43,20 @@ export class InsumoListComponent implements OnInit {
     }
   }
 
+  onRestaurar(id: number): void {
+    if (confirm('¿Está seguro de que desea restaurar este insumo?')) {
+      this.insumoService.restoreInsumo(id).subscribe(
+        () => {
+          console.log('Insumo restaurado');
+          this.loadInsumos(); // Recargar la lista después de restaurar
+        },
+        (error) => {
+          console.error('Error al restaurar el insumo', error);
+        }
+      );
+    }
+  }
+
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
   }

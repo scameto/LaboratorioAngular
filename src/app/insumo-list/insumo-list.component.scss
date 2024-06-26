@@ -6,14 +6,17 @@ h2 {
     background-color: darken(red, 20%);
 }
 
-
-.btn-success {
+.btn.success:hover{
+    background-color: darken(green,30%);
+}
+  
+.btn-primary{
     background-color: #2B4162; 
     border: none;
     font-size:medium;
 }
 
-.btn-success:hover {
+.btn-primary:hover {
     background-color: darken(#2B4162, 10%);
 
 }

@@ -22,6 +22,7 @@ export class ProductCardComponent implements OnInit {
   onPedir(): void {
     this.cartService.agregarAlCarrito(this.product);
     console.log(`Pedido realizado para el producto: ${this.product.nombre}`);
+    console.log(this.product.borrado);
   }
 
   onEliminar() {
@@ -39,16 +40,18 @@ export class ProductCardComponent implements OnInit {
   }
 
   onActivar() {
-    this.productService.activateProducto(this.product.id).subscribe(
-      (product: Product) => {
-        console.log('Producto activado:', product);
-        // Aquí puedes actualizar la interfaz o mostrar un mensaje de éxito
-      },
-      (error) => {
-        console.error('Error al activar el producto', error);
-        // Aquí puedes mostrar un mensaje de error
-      }
-    );
+    if (confirm('¿Está seguro de que desea activar este producto?')) {
+      this.productService.activateProducto(this.product.id).subscribe(
+        (product: Product) => {
+          console.log('Producto activado:', product);
+          window.location.reload();
+        },
+        (error) => {
+          console.error('Error al activar el producto', error);
+          // Aquí puedes mostrar un mensaje de error
+        }
+      );
+    }
   }
 
   isAuthenticated(): boolean {

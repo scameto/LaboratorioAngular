@@ -1,21 +1,35 @@
 <div class="container">
   <h2>Crear Nuevo Producto</h2>
-  <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" #productFormDirective="ngForm">
     <div class="mb-3">
       <label for="nombre" class="form-label">Nombre del Producto</label>
-      <input type="text" id="nombre" class="form-control" required [(ngModel)]="product.nombre" name="nombre">
+      <input type="text" id="nombre" class="form-control" formControlName="nombre">
+      <div *ngIf="productForm?.get('nombre')?.invalid && (productForm?.get('nombre')?.dirty || productForm?.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="productForm?.get('nombre')?.errors?.['required']">El nombre es requerido</div>
+      </div>
     </div>
     <div class="mb-3">
       <label for="descripcion" class="form-label">Descripción</label>
-      <textarea id="descripcion" class="form-control" required [(ngModel)]="product.descripcion" name="descripcion"></textarea>
+      <textarea id="descripcion" class="form-control" formControlName="descripcion"></textarea>
+      <div *ngIf="productForm?.get('descripcion')?.invalid && (productForm?.get('descripcion')?.dirty || productForm?.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="productForm?.get('descripcion')?.errors?.['required']">La descripción es requerida</div>
+      </div>
     </div>
     <div class="mb-3">
       <label for="imagen" class="form-label">Imagen</label>
       <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)">
+      <div *ngIf="productForm?.get('imagen')?.invalid && (productForm?.get('imagen')?.dirty || productForm?.get('imagen')?.touched)">
+        <div class="text-danger" *ngIf="productForm?.get('imagen')?.errors?.['required']">Imagen es requerida</div>
+        <div class="text-danger" *ngIf="productForm?.get('imagen')?.errors?.['incorrect']">Archivo debe ser una imagen</div>
+      </div>
     </div>
     <div class="mb-3">
       <label for="precio" class="form-label">Precio</label>
-      <input type="number" id="precio" class="form-control" required [(ngModel)]="product.precio" name="precio">
+      <input type="number" id="precio" class="form-control" formControlName="precio">
+      <div *ngIf="productForm?.get('precio')?.invalid && (productForm?.get('precio')?.dirty || productForm?.get('precio')?.touched)">
+        <div class="text-danger" *ngIf="productForm?.get('precio')?.errors?.['required']">El precio es requerido</div>
+        <div class="text-danger" *ngIf="productForm?.get('precio')?.errors?.['min']">El precio debe ser mayor o igual a 0</div>
+      </div>
     </div>
     <div class="mb-3">
       <div class="row">
@@ -26,21 +40,26 @@
           <label class="form-label">Cantidad</label>
         </div>
       </div>
-      <div *ngFor="let insumo of product.productoInsumos; let i = index" class="input-group mb-2 row">
-        <div class="col-6">
-          <select class="form-select" [(ngModel)]="insumo.insumoId" name="insumoId{{i}}" required>
-            <option *ngFor="let ins of insumos" [value]="ins.id">{{ins.nombre}}</option>
-          </select>
+      <div formArrayName="productoInsumos">
+        <div *ngFor="let insumo of productInsumos.controls; let i = index" class="input-group mb-2 row">
+          <div class="col-6">
+            <select class="form-select" [formControlName]="i" required>
+              <option *ngFor="let ins of insumos" [value]="ins.id">{{ ins.nombre }}</option>
+            </select>
+          </div>
+          <div class="col-5">
+            <input type="number" class="form-control" placeholder="Cantidad" [formControlName]="i" required>
+          </div>
+          <div class="col-1 d-flex justify-content-end">
+            <button type="button" class="btn btn-danger" (click)="removeInsumo(i)">Eliminar</button>
+          </div>
         </div>
-        <div class="col-5">
-          <input type="number" class="form-control" placeholder="Cantidad" [(ngModel)]="insumo.cantidad" name="cantidad{{i}}" required>
-        </div>
-        <div class="col-1 d-flex justify-content-end">
-          <button type="button" class="btn btn-danger" (click)="removeInsumo(i)">Eliminar</button>
-        </div>
+      </div>
+      <div *ngIf="productForm?.get('productoInsumos')?.errors?.['minInsumos'] && (productForm?.get('productoInsumos')?.dirty || productForm?.get('productoInsumos')?.touched)">
+        <div class="text-danger">Debe agregar al menos un insumo</div>
       </div>
       <button type="button" class="btn btn-secondary" (click)="addInsumo()">Agregar Insumo</button>
     </div>
-    <button type="submit" class="btn btn-primary">Crear Producto</button>
+    <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">Crear Producto</button>
   </form>
 </div>

@@ -1,19 +1,27 @@
 <div class="container">
-    <h2>Crear Insumo</h2>
-    <form (ngSubmit)="createInsumo()">
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" id="nombre" [(ngModel)]="newInsumo.nombre" name="nombre" required>
+  <h2>Crear Insumo</h2>
+  <form [formGroup]="insumoForm" (ngSubmit)="createInsumo()">
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control" id="nombre" formControlName="nombre">
+      <div *ngIf="insumoForm.get('nombre')?.invalid && (insumoForm.get('nombre')?.dirty || insumoForm.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="insumoForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
       </div>
-      <div class="form-group">
-        <label for="descripcion">Descripción</label>
-        <input type="text" class="form-control" id="descripcion" [(ngModel)]="newInsumo.descripcion" name="descripcion" required>
+    </div>
+    <div class="form-group">
+      <label for="descripcion">Descripción</label>
+      <input type="text" class="form-control" id="descripcion" formControlName="descripcion">
+      <div *ngIf="insumoForm.get('descripcion')?.invalid && (insumoForm.get('descripcion')?.dirty || insumoForm.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="insumoForm.get('descripcion')?.errors?.['required']">La descripción es requerida</div>
       </div>
-      <div class="form-group">
-        <label for="unidad_medida">Unidad de Medida</label>
-        <input type="text" class="form-control" id="unidad_medida" [(ngModel)]="newInsumo.unidad_medida" name="unidad_medida" required>
+    </div>
+    <div class="form-group">
+      <label for="unidad_medida">Unidad de Medida</label>
+      <input type="text" class="form-control" id="unidad_medida" formControlName="unidad_medida">
+      <div *ngIf="insumoForm.get('unidad_medida')?.invalid && (insumoForm.get('unidad_medida')?.dirty || insumoForm.get('unidad_medida')?.touched)">
+        <div class="text-danger" *ngIf="insumoForm.get('unidad_medida')?.errors?.['required']">La unidad de medida es requerida</div>
       </div>
-      <button type="submit" class="btn btn-success">Guardar</button>
-    </form>
-  </div>
-  
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="insumoForm.invalid">Guardar</button>
+  </form>
+</div>

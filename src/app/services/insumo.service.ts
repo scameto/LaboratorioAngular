@@ -15,6 +15,10 @@ export class InsumoService {
     return this.http.get<Insumo[]>(`${this.apiUrl}/`);
   }
 
+  getInsumosActivos(): Observable<Insumo[]> {
+    return this.http.get<Insumo[]>(`${this.apiUrl}/activos`);
+  }
+
   getInsumosPaginado(page: number, pageSize: number): Observable<any> {
     const params = new HttpParams()
       .set('page', page.toString())
@@ -23,9 +27,12 @@ export class InsumoService {
     return this.http.get<any>(`${this.apiUrl}/paginado`, { params });
   }
   
+  restoreInsumo(id: number): Observable<any> {
+    return this.http.put(`${this.apiUrl}/restore/${id}`, {});
+  }
 
-  deleteInsumo(id: number): Observable<Insumo> {
-    return this.http.delete<Insumo>(`${this.apiUrl}/${id}`);
+  deleteInsumo(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
   createInsumo(insumo: Insumo): Observable<Insumo> {

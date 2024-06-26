@@ -19,6 +19,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProductos();
+    console.log(this.productos)
   }
 
   loadProductos(): void {
