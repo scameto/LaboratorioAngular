@@ -27,7 +27,7 @@ export class CreateProductComponent implements OnInit {
       descripcion: ['', Validators.required],
       imagen: [null, Validators.required],
       precio: ['', [Validators.required, Validators.min(0)]],
-      productoInsumos: this.fb.array([], this.minInsumos(1))
+      productoInsumos: this.fb.array([], [this.minInsumos(1), this.validateInsumos])
     });
   }
 
@@ -48,14 +48,17 @@ export class CreateProductComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     } else {
+      this.productForm.patchValue({ imagen: null });
       this.productForm.get('imagen')?.setErrors({ incorrect: true });
     }
+    this.productForm.get('imagen')?.markAsTouched(); // Ensure validation messages are displayed
+    console.log(this.productForm.value.imagen);
   }
 
   addInsumo() {
     const insumo = this.fb.group({
-      insumoId: [this.insumos[0]?.id || '', Validators.required],
-      cantidad: [0, Validators.required]
+      insumoId: ['', Validators.required],
+      cantidad: ['', [Validators.required, Validators.min(1)]]
     });
     this.productInsumos.push(insumo);
   }
@@ -66,6 +69,16 @@ export class CreateProductComponent implements OnInit {
 
   get productInsumos(): FormArray {
     return this.productForm.get('productoInsumos') as FormArray;
+  }
+
+  validateInsumos(control: AbstractControl): { [key: string]: boolean } | null {
+    const formArray = control as FormArray;
+    for (let group of formArray.controls) {
+      if (!group.get('insumoId')?.value) {
+        return { invalidInsumo: true };
+      }
+    }
+    return null;
   }
 
   onSubmit() {
@@ -87,7 +100,6 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
-  // Custom validator to check for at least one insumo
   private minInsumos(min: number) {
     return (control: AbstractControl): { [key: string]: boolean } | null => {
       const formArray = control as FormArray;

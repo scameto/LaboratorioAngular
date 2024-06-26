@@ -19,8 +19,7 @@
       <label for="imagen" class="form-label">Imagen</label>
       <input type="file" id="imagen" class="form-control" (change)="onFileChange($event)">
       <div *ngIf="productForm?.get('imagen')?.invalid && (productForm?.get('imagen')?.dirty || productForm?.get('imagen')?.touched)">
-        <div class="text-danger" *ngIf="productForm?.get('imagen')?.errors?.['required']">Imagen es requerida</div>
-        <div class="text-danger" *ngIf="productForm?.get('imagen')?.errors?.['incorrect']">Archivo debe ser una imagen</div>
+        <div class="text-danger" *ngIf="productForm?.get('imagen')?.errors?.['incorrect']">El archivo debe ser una imagen y no puede estar vacío el campo</div>
       </div>
     </div>
     <div class="mb-3">
@@ -41,19 +40,29 @@
         </div>
       </div>
       <div formArrayName="productoInsumos">
-        <div *ngFor="let insumo of productInsumos.controls; let i = index" class="input-group mb-2 row">
+        <div *ngFor="let insumo of productInsumos.controls; let i = index" class="input-group mb-2 row" [formGroupName]="i">
           <div class="col-6">
-            <select class="form-select" [formControlName]="i" required>
+            <select class="form-select" formControlName="insumoId" required>
+              <option value="" disabled>Seleccione un insumo</option>
               <option *ngFor="let ins of insumos" [value]="ins.id">{{ ins.nombre }}</option>
             </select>
+            <div *ngIf="insumo.get('insumoId')?.invalid && (insumo.get('insumoId')?.dirty || insumo.get('insumoId')?.touched)">
+              <div class="text-danger">Insumo es requerido</div>
+            </div>
           </div>
           <div class="col-5">
-            <input type="number" class="form-control" placeholder="Cantidad" [formControlName]="i" required>
+            <input type="number" class="form-control" placeholder="Cantidad" formControlName="cantidad" required>
+            <div *ngIf="insumo.get('cantidad')?.invalid && (insumo.get('cantidad')?.dirty || insumo.get('cantidad')?.touched)">
+              <div class="text-danger">Cantidad es requerida</div>
+            </div>
           </div>
-          <div class="col-1 d-flex justify-content-end">
+          <div class="col-1 justify-content-end">
             <button type="button" class="btn btn-danger" (click)="removeInsumo(i)">Eliminar</button>
           </div>
         </div>
+      </div>
+      <div *ngIf="productForm?.get('productoInsumos')?.errors?.['invalidInsumo'] && (productForm?.get('productoInsumos')?.dirty || productForm?.get('productoInsumos')?.touched)">
+        <div class="text-danger">Al menos un insumo no tiene id seleccionado.</div>
       </div>
       <div *ngIf="productForm?.get('productoInsumos')?.errors?.['minInsumos'] && (productForm?.get('productoInsumos')?.dirty || productForm?.get('productoInsumos')?.touched)">
         <div class="text-danger">Debe agregar al menos un insumo</div>
