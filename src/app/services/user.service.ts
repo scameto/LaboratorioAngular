@@ -16,6 +16,14 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
+  getUsuarios(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/`);
+  }
+
+  getUsuariosPaginados(page: number, pageSize: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/paginado?page=${page}&pageSize=${pageSize}`);
+  }
+
   // Registro de nuevo usuario
   register(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);

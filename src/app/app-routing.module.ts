@@ -13,12 +13,13 @@ import { ForgotPasswordComponent } from "./forgot-password/forgot-password.compo
 import { ChangePasswordComponent } from './change-password/change-password.component'; 
 import { AuthGuard } from './guards/auth.guard';
 import { PedidosComponent } from "./pedidos/pedidos.component";
-
+import { UsuarioListComponent } from "./usuario-list/usuario-list.component";
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'productos/listar', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'usuarios/listar', component: UsuarioListComponent },
   { path: 'productos/listar', component: ProductListComponent},
   { path: 'cuenta', component: CuentaComponent, canActivate: [() => inject(AuthGuard).canActivate()] },
   { path: 'carrito', component: CarritoComponent, canActivate: [() => inject(AuthGuard).canActivate()] },

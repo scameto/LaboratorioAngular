@@ -25,7 +25,8 @@ import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
-import { AuthGuard } from './guards/auth.guard';  // Asegúrate de importar el guardián de autenticación
+import { AuthGuard } from './guards/auth.guard';
+import { UsuarioListComponent } from './usuario-list/usuario-list.component';  // Asegúrate de importar el guardián de autenticación
 
 
 
@@ -44,6 +45,7 @@ import { AuthGuard } from './guards/auth.guard';  // Asegúrate de importar el g
     InsumoListComponent,
     CreateInsumoComponent,
     PedidosComponent,
+    UsuarioListComponent,
     
  
   ],
