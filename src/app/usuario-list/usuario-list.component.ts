@@ -9,10 +9,14 @@ import { Usuario } from '../models/usuario';
 })
 export class UsuarioListComponent implements OnInit {
   usuarios: Usuario[] = [];
+  filteredUsuarios: Usuario[] = [];
   currentPage: number = 1;
   pageSize: number = 10;
   totalItems: number = 0;
   totalPages: number = 0;
+  filterEmail: string = '';
+  filterRole: string = '';
+  filterTelefono: string = '';
 
   constructor(private userService: UserService) { }
 
@@ -25,7 +29,20 @@ export class UsuarioListComponent implements OnInit {
       this.usuarios = response.usuarios;
       this.totalItems = response.totalItems;
       this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+      this.filterUsuarios();
     });
+  }
+
+  filterUsuarios(): void {
+    this.filteredUsuarios = this.usuarios.filter(usuario => 
+      usuario.email.toLowerCase().includes(this.filterEmail.toLowerCase()) &&
+      (this.filterRole === '' || usuario.role === this.filterRole) &&
+      usuario.telefono.includes(this.filterTelefono)
+    );
+  }
+
+  onFilterChange(): void {
+    this.filterUsuarios();
   }
 
   cambiarEstadoUsuario(user: Usuario): void {

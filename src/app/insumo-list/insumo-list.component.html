@@ -1,5 +1,14 @@
-<div class="container mt-4">
+<div class="container mt-5">
   <h2>Lista de Insumos</h2>
+
+  <!-- Filtro por nombre -->
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <input type="text" class="form-control" placeholder="Buscar por nombre" [(ngModel)]="filterNombre" (input)="onFilterChange()">
+    </div>
+  </div>
+
+  <!-- Tabla de insumos -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -11,7 +20,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let insumo of insumos">
+      <tr *ngFor="let insumo of filteredInsumos">
         <th scope="row">{{ insumo.id }}</th>
         <td>{{ insumo.nombre }}</td>
         <td class="d-none d-md-table-cell">{{ insumo.descripcion }}</td>
@@ -33,6 +42,8 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- Paginación -->
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">
@@ -50,5 +61,6 @@
       </li>
     </ul>
   </nav>
+
   <a class="btn btn-primary me-2" *ngIf="isAuthenticated() && isAdmin()" [routerLink]="['/insumo/crear']">Crear</a>
 </div>

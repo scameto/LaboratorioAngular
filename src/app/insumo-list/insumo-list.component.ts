@@ -10,10 +10,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class InsumoListComponent implements OnInit {
   insumos: Insumo[] = [];
+  filteredInsumos: Insumo[] = [];
   currentPage: number = 1;
   pageSize: number = 10;
   totalItems: number = 0;
   totalPages: number = 0;
+  filterNombre: string = '';
 
   constructor(private insumoService: InsumoService, private authService: AuthService) { }
 
@@ -26,7 +28,18 @@ export class InsumoListComponent implements OnInit {
       this.insumos = response.insumos;
       this.totalItems = response.totalItems;
       this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+      this.filterInsumos();
     });
+  }
+
+  filterInsumos(): void {
+    this.filteredInsumos = this.insumos.filter(insumo =>
+      insumo.nombre.toLowerCase().includes(this.filterNombre.toLowerCase())
+    );
+  }
+
+  onFilterChange(): void {
+    this.filterInsumos();
   }
 
   onEliminar(id: number): void {
