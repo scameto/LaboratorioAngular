@@ -38,6 +38,7 @@ export class RegisterComponent {
     this.userService.register(this.registerForm.value).subscribe(
       data => {
         console.log('User registered successfully!', data);
+        
         alert('Registro exitoso. Redirigiendo a la página de inicio de sesión.');
         this.router.navigate(['/login']);
       },

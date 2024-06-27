@@ -13,29 +13,24 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router) { }
 
-
   login2(form: any): void {
     if (form.valid) {
-      console.log('Login form is valid');
       this.userService.login({ email: this.email, password: this.password }).subscribe({
         next: response => {
-          console.log('Response from server:', response);
           localStorage.setItem('telefono', response.telefono);
           localStorage.setItem('emailU', response.nombre);
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
-        
-          console.log('Login successful', response);
           this.router.navigate(['/productos/listar']);
         },
         error: error => {
-          console.error('Login failed', error);
-          alert('Credenciales inválidas. Por favor, intente nuevamente.');
+          if (error.status === 403) {
+            alert('La cuenta está deshabilitada. Por favor, contacte al administrador.');
+          } else {
+            alert('Credenciales inválidas. Por favor, intente nuevamente.');
+          }
         }
       });
-    } else {
-      console.log('Login form is invalid');
     }
   }
-
 }
