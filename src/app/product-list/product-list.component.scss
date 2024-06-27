@@ -5,6 +5,10 @@
 //     background-color: transparent;
 //   }
 
+  .mt-custom {
+  margin-top: 100px; /* Ajusta este valor según lo necesites */
+  }
+
   #main-container {
     height: 100%;
     //overflow: hidden;
@@ -13,7 +17,7 @@
   .cards-container {
     height: calc(100vh - 80px); // Ajusta según la altura de tu navbar
     overflow-y:auto;
-    padding-top: 80px; // Ajusta según la altura de tu navbar
+    padding-top: 10px; // Ajusta según la altura de tu navbar
     background: transparent; // Asegúrate de que el fondo sea transparente
   }
 

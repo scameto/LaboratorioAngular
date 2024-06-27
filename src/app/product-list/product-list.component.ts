@@ -10,6 +10,10 @@ import { AuthService } from '../services/auth.service';
 })
 export class ProductListComponent implements OnInit {
   productos: Product[] = [];
+  filteredProductos: Product[] = [];
+  filterText: string = '';
+  filterMinPrice: number | null = null;
+  filterMaxPrice: number | null = null;
   currentPage: number = 1;
   pageSize: number = 6;
   totalItems: number = 0;
@@ -19,7 +23,6 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProductos();
-    console.log(this.productos)
   }
 
   loadProductos(): void {
@@ -29,6 +32,7 @@ export class ProductListComponent implements OnInit {
           this.productos = response.productos;
           this.totalItems = response.totalItems;
           this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+          this.filterProductos();
         },
         error => {
           console.error('Error fetching products:', error);
@@ -40,12 +44,25 @@ export class ProductListComponent implements OnInit {
           this.productos = response.productos;
           this.totalItems = response.totalItems;
           this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+          this.filterProductos();
         },
         error => {
           console.error('Error fetching products:', error);
         }
       );
     }
+  }
+
+  filterProductos(): void {
+    this.filteredProductos = this.productos.filter(product =>
+      product.nombre.toLowerCase().includes(this.filterText.toLowerCase()) &&
+      (this.filterMinPrice === null || product.precio >= this.filterMinPrice) &&
+      (this.filterMaxPrice === null || product.precio <= this.filterMaxPrice)
+    );
+  }
+
+  onFilterChange(): void {
+    this.filterProductos();
   }
 
   isAuthenticated(): boolean {
