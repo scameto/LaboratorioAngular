@@ -28,8 +28,7 @@
             <div class="form-group mt-3">
               <label for="role">Rol</label>
               <select id="role" formControlName="role" class="form-control" [ngClass]="{ 'is-invalid': submitted && f['role'].errors }">
-                <option value="">Seleccione un rol</option>
-                <option value="PANADERO">Panadero</option>
+                
                 <option value="USER">Usuario</option>
               </select>
               <div *ngIf="submitted && f['role'].errors" class="invalid-feedback">
