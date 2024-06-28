@@ -15,6 +15,7 @@
 
 .card .card-body {
   padding: 10px;
+  //min-width: 350px;
 }
 
 /* Contenedor de la imagen */
@@ -39,3 +40,10 @@
   border-color: #2B4162;
   color:  #ffffff;
 }
+
+.price-container {
+  //margin-bottom: 10px;
+  font-size: 1.3em;
+}
+
+

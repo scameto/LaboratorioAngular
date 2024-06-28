@@ -158,6 +158,7 @@ export class PedidosComponent implements OnInit {
   }
 
   toggleMostrarInsumos() {
+    this.filtrarPedidos();
     this.mostrarInsumos = !this.mostrarInsumos;
   }
 
