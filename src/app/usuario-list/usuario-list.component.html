@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container ">
   <h2>Lista de Usuarios</h2>
   
   <!-- Filtros -->
@@ -23,20 +23,20 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>ID</th>
+        <th scope="col" class="d-none d-md-table-cell">ID</th>
         <th>Email</th>
         <th>Rol</th>
-        <th>Teléfono</th>
+        <th scope="col" class="d-none d-md-table-cell">Teléfono</th>
         <th>Estado</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let usuario of filteredUsuarios">
-        <td>{{ usuario.id }}</td>
+        <td class="d-none d-md-table-cell">{{ usuario.id }}</td>
         <td>{{ usuario.email }}</td>
         <td>{{ usuario.role }}</td>
-        <td>{{ usuario.telefono }}</td>
+        <td class="d-none d-md-table-cell">{{ usuario.telefono }}</td>
         <td>{{ usuario.enabled ? 'Habilitado' : 'Deshabilitado' }}</td>
         <td>
           <button class="btn btn-warning" (click)="cambiarEstadoUsuario(usuario)">
