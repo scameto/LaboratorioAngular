@@ -54,6 +54,11 @@ export class UserService {
     return this.http.post(`${this.apiUrl}/disable-user`, { id: userId });
   }
 
+  changeUserRole(id: number, newRole: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/role`, { id, newRole });
+  }
+
+
   getUser(){
     const email = localStorage.getItem('emailU');
     const telefono = localStorage.getItem('telefono');
@@ -85,6 +90,5 @@ export class UserService {
     localStorage.removeItem('role');
     this.router.navigate(['/login']);
   }
-
 
 }

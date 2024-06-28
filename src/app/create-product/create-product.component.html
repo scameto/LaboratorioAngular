@@ -44,7 +44,7 @@
           <div class="col-6">
             <select class="form-select" formControlName="insumoId" required>
               <option value="" disabled>Seleccione un insumo</option>
-              <option *ngFor="let ins of insumos" [value]="ins.id">{{ ins.nombre }}</option>
+              <option *ngFor="let ins of insumos" [value]="ins.id">{{ ins.nombre }} ({{ins.unidad_medida}})</option>
             </select>
             <div *ngIf="insumo.get('insumoId')?.invalid && (insumo.get('insumoId')?.dirty || insumo.get('insumoId')?.touched)">
               <div class="text-danger">Insumo es requerido</div>

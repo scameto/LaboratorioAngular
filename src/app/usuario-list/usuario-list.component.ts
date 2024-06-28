@@ -69,6 +69,23 @@ export class UsuarioListComponent implements OnInit {
     }
   }
 
+  cambiarRolUsuario(user: Usuario, newRole: string): void {
+    this.userService.changeUserRole(user.id, newRole).subscribe(
+      () => {
+        user.role = newRole;
+      },
+      (error) => {
+        console.error('Error al cambiar el rol del usuario:', error);
+      }
+    );
+  }
+  
+  onRoleChange(event: Event, user: Usuario): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const newRole = selectElement.value;
+    this.cambiarRolUsuario(user, newRole);
+  }  
+
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;

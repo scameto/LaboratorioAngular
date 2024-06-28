@@ -33,14 +33,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let usuario of filteredUsuarios">
-        <td>{{ usuario.id }}</td>
-        <td>{{ usuario.email }}</td>
-        <td>{{ usuario.role }}</td>
-        <td>{{ usuario.telefono }}</td>
-        <td>{{ usuario.enabled ? 'Habilitado' : 'Deshabilitado' }}</td>
+        <td>{{ usuario?.id }}</td>
+        <td>{{ usuario?.email }}</td>
+        <td>
+          <select class="form-control" [(ngModel)]="usuario.role" (change)="onRoleChange($event, usuario)">
+            <option value="ADMIN">ADMIN</option>
+            <option value="PANADERO">PANADERO</option>
+            <option value="USER">USER</option>
+          </select>
+        </td>
+        <td>{{ usuario?.telefono }}</td>
+        <td>{{ usuario?.enabled ? 'Habilitado' : 'Deshabilitado' }}</td>
         <td>
           <button class="btn btn-warning" (click)="cambiarEstadoUsuario(usuario)">
-            {{ usuario.enabled ? 'Deshabilitar' : 'Habilitar' }}
+            {{ usuario?.enabled ? 'Deshabilitar' : 'Habilitar' }}
           </button>
         </td>
       </tr>
