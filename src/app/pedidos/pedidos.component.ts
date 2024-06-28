@@ -5,6 +5,11 @@ import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { InsumoService } from '../services/insumo.service';
 
+interface Insumo {
+  nombre: string;
+  unidad_medida: string;
+  cantidadTotal: number;
+}
 
 @Component({
   selector: 'app-pedidos',
@@ -18,6 +23,8 @@ export class PedidosComponent implements OnInit {
   modoMisPedidos: boolean = false;
   insumosVisibles: { [key: string]: boolean } = {};
   insumos: any[] = [];
+  totalInsumos: any[] = [];
+  mostrarInsumos: boolean = false;
 
 
 
@@ -52,6 +59,7 @@ export class PedidosComponent implements OnInit {
     } else {
       this.filtrarPedidos();
     }
+    this.calcularTotalInsumos();
   }
 
   filtrarPedidos() {
@@ -62,6 +70,7 @@ export class PedidosComponent implements OnInit {
       const matchesCliente = this.filtros.cliente ? pedido.usuario && pedido.usuario.email.includes(this.filtros.cliente) : true;
       return matchesEstado && matchesFechaDesde && matchesFechaHasta && matchesCliente;
     });
+    this.calcularTotalInsumos();
   }
 
   actualizarEstado(pedido: any, nuevoEstado: string): void {
@@ -83,7 +92,7 @@ export class PedidosComponent implements OnInit {
   cargarInsumos() {
     this.insumoService.getInsumos().subscribe(insumos => {
       this.insumos = insumos;
-      //console.log(this.insumos); 
+      console.log(this.insumos); 
 
     });
   }
@@ -125,6 +134,31 @@ export class PedidosComponent implements OnInit {
 
   isAuthenticated(){
     return this.userService.isAuthenticated();
+  }
+  
+  calcularTotalInsumos() {
+    const total: { [key: string]: any } = {};
+
+    this.pedidosFiltrados.forEach(pedido => {
+      pedido.articulos.forEach((articulo: any) => {
+        this.calcularInsumos(articulo).forEach((insumo: Insumo) => {
+          if (!total[insumo.nombre]) {
+            total[insumo.nombre] = {
+              nombre: insumo.nombre,
+              unidad_medida: insumo.unidad_medida,
+              cantidadTotal: 0
+            };
+          }
+          total[insumo.nombre].cantidadTotal += insumo.cantidadTotal;
+        });
+      });
+    });
+
+    this.totalInsumos = Object.values(total);
+  }
+
+  toggleMostrarInsumos() {
+    this.mostrarInsumos = !this.mostrarInsumos;
   }
 
 }
