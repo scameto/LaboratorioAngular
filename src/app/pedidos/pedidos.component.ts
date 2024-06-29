@@ -169,7 +169,7 @@ export class PedidosComponent implements OnInit {
       case 'enPreparacion':
         return 'EN PREPARACION';
       case 'listoParaRetirar':
-        return 'LISTO PARA RETIRAR';
+        return 'LISTO !!!';
       default:
         return '';
     }
