@@ -87,6 +87,7 @@ export class PedidosComponent implements OnInit {
       cliente: ''
     };
     this.cargarPedidos();
+    //this.eliminarTodosLosPedidos();
   }
 
   cargarInsumos() {
@@ -104,7 +105,7 @@ export class PedidosComponent implements OnInit {
     return articulo.producto.insumos.map((insumo: any) => {
       const detalleInsumo = this.insumos.find(i => i.id === insumo.insumoId);
       if (!detalleInsumo) {
-        console.error(`Insumo con ID ${insumo.insumoId} no encontrado.`);
+        //console.error(`Insumo con ID ${insumo.insumoId} no encontrado.`);
       }
       return {
         nombre: detalleInsumo ? detalleInsumo.nombre : 'Insumo desconocido',
@@ -173,6 +174,12 @@ export class PedidosComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+
+
+  eliminarTodosLosPedidos() {
+    localStorage.removeItem('pedidos');
   }
 
 }
