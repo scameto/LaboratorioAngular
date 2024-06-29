@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="mb-3">
-      <label for="precio" class="form-label">Precio</label>
+      <label for="precio" class="form-label">Precio $</label>
       <input type="number" id="precio" class="form-control" formControlName="precio">
       <div *ngIf="productForm?.get('precio')?.invalid && (productForm?.get('precio')?.dirty || productForm?.get('precio')?.touched)">
         <div class="text-danger" *ngIf="productForm?.get('precio')?.errors?.['required']">El precio es requerido</div>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div formArrayName="productoInsumos">
-        <div *ngFor="let insumo of productInsumos.controls; let i = index" class="input-group mb-2 row" [formGroupName]="i">
+        <div *ngFor="let insumo of productInsumos.controls; let i = index" class="input-group d-flex mb-2 row" [formGroupName]="i">
           <div class="col-6">
             <select class="form-select" formControlName="insumoId" required>
               <option value="" disabled>Seleccione un insumo</option>
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="col-1 justify-content-end">
-            <button type="button" class="btn btn-danger" (click)="removeInsumo(i)">Eliminar</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeInsumo(i)">Eliminar</button>
           </div>
         </div>
       </div>

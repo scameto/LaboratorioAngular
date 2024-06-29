@@ -87,6 +87,7 @@ export class PedidosComponent implements OnInit {
       cliente: ''
     };
     this.cargarPedidos();
+    //this.eliminarTodosLosPedidos();
   }
 
   cargarInsumos() {
@@ -173,6 +174,12 @@ export class PedidosComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+
+
+  eliminarTodosLosPedidos() {
+    localStorage.removeItem('pedidos');
   }
 
 }

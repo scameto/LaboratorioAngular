@@ -27,3 +27,30 @@ h2 {
 .btn-primary:hover {
     background-color: darken(#2B4162, 10%);
 }
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 576px) {
+    .form-label {
+      font-size: 0.875rem;
+    }
+    
+    .form-control, .form-select {
+      font-size: 0.875rem;
+    }
+    
+    .input-group {
+      flex-direction: row;
+      width: 90%;
+    }
+    
+    .input-group .col-6, .input-group .col-5, .input-group .col-1 {
+      //width: 90%;
+      margin-bottom: 0.5rem;
+    }
+    
+   
+  }
