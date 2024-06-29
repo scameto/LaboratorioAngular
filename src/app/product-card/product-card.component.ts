@@ -4,6 +4,7 @@ import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { AuthService } from '../services/auth.service';
 import { CarritoService } from '../services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-card',
@@ -14,7 +15,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product!: Product;
 
-  constructor(private productService: ProductService,private authService: AuthService, private cartService: CarritoService) { }
+  constructor(private productService: ProductService,private authService: AuthService, private cartService: CarritoService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -40,18 +41,17 @@ export class ProductCardComponent implements OnInit {
   }
 
   onActivar() {
-    if (confirm('¿Está seguro de que desea activar este producto?')) {
-      this.productService.activateProducto(this.product.id).subscribe(
-        (product: Product) => {
-          console.log('Producto activado:', product);
-          window.location.reload();
-        },
-        (error) => {
-          console.error('Error al activar el producto', error);
-          // Aquí puedes mostrar un mensaje de error
-        }
-      );
-    }
+    this.productService.activateProducto(this.product.id).subscribe(
+      (product: Product) => {
+        console.log('Producto activado:', product);
+        this.toastr.success('Producto activado')
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error al activar el producto', error);
+        // Aquí puedes mostrar un mensaje de error
+      }
+    );
   }
 
   isAuthenticated(): boolean {

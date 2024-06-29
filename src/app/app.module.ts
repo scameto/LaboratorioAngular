@@ -27,7 +27,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UsuarioListComponent } from './usuario-list/usuario-list.component';  // Asegúrate de importar el guardián de autenticación
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { UsuarioListComponent } from './usuario-list/usuario-list.component';  /
     PedidosComponent,
     UsuarioListComponent,
     
+    
  
   ],
   imports: [
@@ -58,6 +60,12 @@ import { UsuarioListComponent } from './usuario-list/usuario-list.component';  /
     ReactiveFormsModule,
     ForgotPasswordComponent,
     ChangePasswordComponent,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right', // Puedes cambiar esto a la posición que desees
+      preventDuplicates: true,
+      toastClass: 'ngx-toastr custom-toast',
+    }),
   ],
   providers: [
     UserService,

@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+.custom-toast.ngx-toastr {
+    font-size: 20px !important;
+    min-width: 500px !important;
+    padding: 15px !important;
+    border-radius: 10px !important;
+    background-color: #f8f9fa !important;
+  
+    &.toast-success {
+        background-color: #28a745 !important;
+        color: #fff !important; // Asegura que el texto sea visible
+        display: flex !important;
+        align-items: center !important;
+
+        .toast-message {
+            margin-left: 30px;
+            flex: 1 !important;  // Ocupa todo el espacio disponible
+        }
+    }
+  
+    &.toast-error {
+        background-color: #dc3545 !important;
+        color: #fff !important; // Asegura que el texto sea visible
+        display: flex !important;
+        align-items: center !important;
+
+        .toast-message {
+            margin-left: 30px;
+            flex: 1 !important;  // Ocupa todo el espacio disponible
+        }
+    }
+}
+  

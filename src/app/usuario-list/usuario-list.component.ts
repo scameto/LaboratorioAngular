@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from '../services/user.service';
 import { Usuario } from '../models/usuario';
 
@@ -18,7 +19,7 @@ export class UsuarioListComponent implements OnInit {
   filterRole: string = '';
   filterTelefono: string = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadUsers();
@@ -50,41 +51,28 @@ export class UsuarioListComponent implements OnInit {
       this.userService.disableUser(user.id).subscribe(
         () => {
           user.enabled = false;
+          this.toastr.success('Usuario deshabilitado correctamente');
           this.loadUsers(); // Recargar la lista después de cambiar el estado
         },
         (error) => {
           console.error('Error al desactivar al usuario:', error);
+          this.toastr.error('Error al deshabilitar el usuario');
         }
       );
     } else {
       this.userService.enableUser(user.id).subscribe(
         () => {
           user.enabled = true;
+          this.toastr.success('Usuario habilitado correctamente');
           this.loadUsers(); // Recargar la lista después de cambiar el estado
         },
         (error) => {
           console.error('Error al activar al usuario:', error);
+          this.toastr.error('Error al habilitar el usuario');
         }
       );
     }
   }
-
-  cambiarRolUsuario(user: Usuario, newRole: string): void {
-    this.userService.changeUserRole(user.id, newRole).subscribe(
-      () => {
-        user.role = newRole;
-      },
-      (error) => {
-        console.error('Error al cambiar el rol del usuario:', error);
-      }
-    );
-  }
-  
-  onRoleChange(event: Event, user: Usuario): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const newRole = selectElement.value;
-    this.cambiarRolUsuario(user, newRole);
-  }  
 
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
@@ -95,5 +83,24 @@ export class UsuarioListComponent implements OnInit {
 
   getPagesArray(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  cambiarRolUsuario(user: Usuario, newRole: string): void {
+    this.userService.changeUserRole(user.id, newRole).subscribe(
+      () => {
+        user.role = newRole;
+        this.toastr.success('Rol de usuario cambiado correctamente');
+      },
+      (error) => {
+        console.error('Error al cambiar el rol del usuario:', error);
+        this.toastr.error('Error al cambiar el rol del usuario');
+      }
+    );
+  }
+
+  onRoleChange(event: Event, user: Usuario): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const newRole = selectElement.value;
+    this.cambiarRolUsuario(user, newRole);
   }
 }
