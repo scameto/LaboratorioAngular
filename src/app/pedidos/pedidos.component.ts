@@ -162,4 +162,17 @@ export class PedidosComponent implements OnInit {
     this.mostrarInsumos = !this.mostrarInsumos;
   }
 
+  getEstadoTexto(estado: string): string {
+    switch (estado) {
+      case 'pendiente':
+        return 'PENDIENTE';
+      case 'enPreparacion':
+        return 'EN PREPARACION';
+      case 'listoParaRetirar':
+        return 'LISTO !!!';
+      default:
+        return '';
+    }
+  }
+
 }
