@@ -1,0 +1,11 @@
+<div class="confirm-overlay" *ngIf="visible"></div>
+<div class="confirm-dialog" *ngIf="visible">
+  <div class="confirm-header">Confirmación</div>
+  <div class="confirm-body">
+    <p>{{ message }}</p>
+  </div>
+  <div class="confirm-footer">
+    <button class="confirm-button" (click)="confirm(true)">Confirmar</button>
+    <button class="cancel-button" (click)="confirm(false)">Cancelar</button>
+  </div>
+</div>

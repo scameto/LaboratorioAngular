@@ -1,3 +1,8 @@
+<app-confirm-dialog 
+  #confirmDialog
+  (confirmAction)="handleConfirm($event)">
+</app-confirm-dialog>
+
 <div class="card mb-4 shadow-sm d-flex flex-column">
   <div class="img-container">
     <img [src]="product.imagen" alt="Imagen del producto" />

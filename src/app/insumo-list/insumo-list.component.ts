@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { InsumoService } from '../services/insumo.service';
 import { Insumo } from '../models/insumo';
 import { AuthService } from '../services/auth.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-insumo-list',
@@ -16,6 +17,9 @@ export class InsumoListComponent implements OnInit {
   totalItems: number = 0;
   totalPages: number = 0;
   filterNombre: string = '';
+  @ViewChild(ConfirmDialogComponent) confirmDialog!: ConfirmDialogComponent;
+  confirmType: 'eliminar' | 'restaurar' | null = null;
+  selectedInsumoId: number | null = null;
 
   constructor(private insumoService: InsumoService, private authService: AuthService) { }
 
@@ -43,31 +47,45 @@ export class InsumoListComponent implements OnInit {
   }
 
   onEliminar(id: number): void {
-    if (confirm('¿Está seguro de que desea eliminar este insumo?')) {
-      this.insumoService.deleteInsumo(id).subscribe(
-        () => {
-          console.log('Insumo eliminado');
-          this.loadInsumos(); // Recargar la lista después de eliminar
-        },
-        (error) => {
-          console.error('Error al eliminar el insumo', error);
-        }
-      );
-    }
+    this.confirmType = 'eliminar';
+    this.selectedInsumoId = id;
+    this.confirmDialog.message = '¿Está seguro de que desea eliminar este insumo?';
+    this.confirmDialog.show();
   }
 
   onRestaurar(id: number): void {
-    if (confirm('¿Está seguro de que desea restaurar este insumo?')) {
-      this.insumoService.restoreInsumo(id).subscribe(
-        () => {
-          console.log('Insumo restaurado');
-          this.loadInsumos(); // Recargar la lista después de restaurar
-        },
-        (error) => {
-          console.error('Error al restaurar el insumo', error);
-        }
-      );
+    this.confirmType = 'restaurar';
+    this.selectedInsumoId = id;
+    this.confirmDialog.message = '¿Está seguro de que desea restaurar este insumo?';
+    this.confirmDialog.show();
+  }
+
+  handleConfirm(confirmed: boolean) {
+    if (confirmed && this.selectedInsumoId !== null) {
+      if (this.confirmType === 'eliminar') {
+        this.insumoService.deleteInsumo(this.selectedInsumoId).subscribe(
+          () => {
+            console.log('Insumo eliminado');
+            this.loadInsumos(); // Recargar la lista después de eliminar
+          },
+          (error) => {
+            console.error('Error al eliminar el insumo', error);
+          }
+        );
+      } else if (this.confirmType === 'restaurar') {
+        this.insumoService.restoreInsumo(this.selectedInsumoId).subscribe(
+          () => {
+            console.log('Insumo restaurado');
+            this.loadInsumos(); // Recargar la lista después de restaurar
+          },
+          (error) => {
+            console.error('Error al restaurar el insumo', error);
+          }
+        );
+      }
     }
+    this.confirmType = null;
+    this.selectedInsumoId = null;
   }
 
   isAuthenticated(): boolean {

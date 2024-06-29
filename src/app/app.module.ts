@@ -29,6 +29,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { UsuarioListComponent } from './usuario-list/usuario-list.component';  // Asegúrate de importar el guardián de autenticación
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { ToastrModule } from 'ngx-toastr';
     CreateInsumoComponent,
     PedidosComponent,
     UsuarioListComponent,
+    ConfirmDialogComponent,
     
     
  

@@ -64,3 +64,8 @@
 
   <a class="btn btn-primary me-2" *ngIf="isAuthenticated() && isAdmin()" [routerLink]="['/insumo/crear']">Crear</a>
 </div>
+
+<app-confirm-dialog 
+  #confirmDialog
+  (confirmAction)="handleConfirm($event)">
+</app-confirm-dialog>

@@ -1,0 +1,80 @@
+// src/app/confirm-dialog/confirm-dialog.component.scss
+.confirm-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 1000;
+  overflow: hidden;
+
+  .confirm-header {
+    background-color: #6D3D14;
+    color: white;
+    padding: 16px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .confirm-body {
+    padding: 20px;
+    font-size: 16px;
+    text-align: center;
+    color: #333;
+
+    p {
+      margin: 0;
+      margin-bottom: 16px;
+    }
+  }
+
+  .confirm-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f8f9fa;
+
+    button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &.confirm-button {
+        background-color: #28a745;
+        color: white;
+
+        &:hover {
+          background-color: #218838;
+        }
+      }
+
+      &.cancel-button {
+        background-color: #dc3545;
+        color: white;
+
+        &:hover {
+          background-color: #c82333;
+        }
+      }
+    }
+  }
+}
+
+.confirm-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
