@@ -18,6 +18,7 @@ export class LoginComponent {
     if (form.valid) {
       this.userService.login({ email: this.email, password: this.password }).subscribe({
         next: response => {
+          localStorage.setItem('id', response.id);
           localStorage.setItem('telefono', response.telefono);
           localStorage.setItem('emailU', response.nombre);
           localStorage.setItem('token', response.token);
