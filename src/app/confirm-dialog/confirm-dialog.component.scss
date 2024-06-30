@@ -78,3 +78,30 @@
   background: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
+
+@media (max-width: 767px) {
+  .confirm-dialog {
+    width: 90%;
+    font-size: 14px;
+
+    .confirm-header {
+      padding: 12px;
+      font-size: 18px;
+    }
+
+    .confirm-body {
+      padding: 16px;
+      font-size: 14px;
+    }
+
+    .confirm-footer {
+      padding: 8px;
+
+      button {
+        margin: 0 4px;
+        padding: 8px;
+        font-size: 14px;
+      }
+    }
+  }
+}
