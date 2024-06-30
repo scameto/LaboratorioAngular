@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Usuario } from '../models/usuario';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-list',
@@ -9,6 +10,7 @@ import { Usuario } from '../models/usuario';
   styleUrls: ['./usuario-list.component.scss']
 })
 export class UsuarioListComponent implements OnInit {
+  @ViewChild(ConfirmDialogComponent) confirmDialog!: ConfirmDialogComponent;
   usuarios: Usuario[] = [];
   filteredUsuarios: Usuario[] = [];
   currentPage: number = 1;
@@ -18,6 +20,8 @@ export class UsuarioListComponent implements OnInit {
   filterEmail: string = '';
   filterRole: string = '';
   filterTelefono: string = '';
+  confirmType: 'deshabilitar' | 'habilitar' | null = null;
+  userToChange!: Usuario;
 
   constructor(private userService: UserService, private toastr: ToastrService) { }
 
@@ -47,31 +51,39 @@ export class UsuarioListComponent implements OnInit {
   }
 
   cambiarEstadoUsuario(user: Usuario): void {
-    if (user.enabled) {
-      this.userService.disableUser(user.id).subscribe(
-        () => {
-          user.enabled = false;
-          this.toastr.success('Usuario deshabilitado correctamente');
-          this.loadUsers(); // Recargar la lista después de cambiar el estado
-        },
-        (error) => {
-          console.error('Error al desactivar al usuario:', error);
-          this.toastr.error('Error al deshabilitar el usuario');
-        }
-      );
-    } else {
-      this.userService.enableUser(user.id).subscribe(
-        () => {
-          user.enabled = true;
-          this.toastr.success('Usuario habilitado correctamente');
-          this.loadUsers(); // Recargar la lista después de cambiar el estado
-        },
-        (error) => {
-          console.error('Error al activar al usuario:', error);
-          this.toastr.error('Error al habilitar el usuario');
-        }
-      );
+    this.userToChange = user;
+    this.confirmType = user.enabled ? 'deshabilitar' : 'habilitar';
+    this.confirmDialog.message = user.enabled 
+      ? '¿Está seguro de que desea deshabilitar este usuario?' 
+      : '¿Está seguro de que desea habilitar este usuario?';
+    this.confirmDialog.show();
+  }
+
+  handleConfirm(confirmed: boolean) {
+    if (confirmed) {
+      if (this.confirmType === 'deshabilitar') {
+        this.userService.disableUser(this.userToChange.id).subscribe(
+          () => {
+            this.userToChange.enabled = false;
+            this.loadUsers();
+          },
+          (error) => {
+            console.error('Error al desactivar al usuario:', error);
+          }
+        );
+      } else if (this.confirmType === 'habilitar') {
+        this.userService.enableUser(this.userToChange.id).subscribe(
+          () => {
+            this.userToChange.enabled = true;
+            this.loadUsers();
+          },
+          (error) => {
+            console.error('Error al activar al usuario:', error);
+          }
+        );
+      }
     }
+    this.confirmType = null;
   }
 
   onPageChange(page: number): void {

@@ -1,4 +1,9 @@
-<div class="container ">
+<app-confirm-dialog 
+  #confirmDialog
+  (confirmAction)="handleConfirm($event)">
+</app-confirm-dialog>
+
+<div class="container">
   <h2>Lista de Usuarios</h2>
   
   <!-- Filtros -->
