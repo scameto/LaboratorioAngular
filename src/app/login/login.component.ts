@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
   login2(form: any): void {
     if (form.valid) {
@@ -22,12 +23,13 @@ export class LoginComponent {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
           this.router.navigate(['/productos/listar']);
+          this.toastr.success('Inicio de sesión exitoso, bienvenido');
         },
         error: error => {
           if (error.status === 403) {
-            alert('La cuenta está deshabilitada. Por favor, contacte al administrador.');
+            this.toastr.error('La cuenta está deshabilitada. Por favor, contacte al administrador.');
           } else {
-            alert('Credenciales inválidas. Por favor, intente nuevamente.');
+            this.toastr.error('Credenciales inválidas. Por favor, intente nuevamente.');
           }
         }
       });

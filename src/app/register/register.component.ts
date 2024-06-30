@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,8 @@ export class RegisterComponent {
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private router: Router
-  
+    private router: Router,
+    private toastr: ToastrService
   ) {
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,14 +38,15 @@ export class RegisterComponent {
 
     this.userService.register(this.registerForm.value).subscribe(
       data => {
-        console.log('User registered successfully!', data);
-        
-        alert('Registro exitoso. Redirigiendo a la página de inicio de sesión.');
+        this.toastr.success('Registro exitoso. Redirigiendo a la página de inicio de sesión.');
         this.router.navigate(['/login']);
       },
       error => {
-        console.error('Error registering user', error);
-        alert('Error al registrar usuario. Por favor, inténtelo de nuevo.');
+        if (error.status === 400) {
+          this.toastr.error('El correo electrónico ya está en uso.');
+        } else {
+          this.toastr.error('Error al registrar usuario. Por favor, inténtelo de nuevo.');
+        }
       }
     );
   }

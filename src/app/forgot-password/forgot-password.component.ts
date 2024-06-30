@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
@@ -13,10 +14,8 @@ import { UserService } from '../services/user.service';
 })
 export class ForgotPasswordComponent {
   forgotPasswordForm: FormGroup;
-  message: string | null = null;
-  error: string | null = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
     this.forgotPasswordForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -27,12 +26,10 @@ export class ForgotPasswordComponent {
       this.userService.forgotPassword(this.forgotPasswordForm.value.email)
         .subscribe({
           next: (response) => {
-            this.message = 'Se ha enviado un enlace para restablecer la contraseña a tu correo.';
-            this.error = null;
+            this.toastr.success('Se ha enviado un enlace para restablecer la contraseña a tu correo.');
           },
           error: (err) => {
-            this.error = 'Ocurrió un error. Por favor, inténtalo de nuevo.';
-            this.message = null;
+            this.toastr.error('Profavor introduzca un correo electronico valido');
           }
         });
     }

@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../services/user.service'; // Asegúrate de que la ruta sea correcta
+import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   standalone: true,
@@ -13,10 +14,8 @@ import { UserService } from '../services/user.service'; // Asegúrate de que la 
 })
 export class ChangePasswordComponent {
   changePasswordForm: FormGroup;
-  message: string | null = null;
-  error: string | null = null;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
     this.changePasswordForm = this.fb.group({
       id: ['', [Validators.required]],
       oldPassword: ['', [Validators.required]],
@@ -38,12 +37,10 @@ export class ChangePasswordComponent {
       };
       this.userService.changePassword(data).subscribe({
         next: (response) => {
-          this.message = 'Contraseña actualizada correctamente.';
-          this.error = null;
+          this.toastr.success('Contraseña actualizada correctamente.');
         },
         error: (err) => {
-          this.error = 'Ocurrió un error. Por favor, inténtalo de nuevo.';
-          this.message = null;
+          this.toastr.error('La contrsaeña es incorrecta');
           console.error(err); // Log para ver el error
         }
       });

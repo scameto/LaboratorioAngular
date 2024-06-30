@@ -1,24 +1,37 @@
 <!-- src/app/update-product/update-product.component.html -->
 <div class="container mt-4">
-    <h2>Actualizar Producto</h2>
-    <form [formGroup]="updateProductForm">
-      <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" formControlName="nombre">
+  <h2>Actualizar Producto</h2>
+  <form [formGroup]="updateProductForm">
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre del Producto</label>
+      <input type="text" id="nombre" class="form-control" formControlName="nombre">
+      <div *ngIf="updateProductForm.get('nombre')?.invalid && (updateProductForm.get('nombre')?.dirty || updateProductForm.get('nombre')?.touched)">
+        <div class="text-danger" *ngIf="updateProductForm.get('nombre')?.errors?.['required']">El nombre es requerido</div>
       </div>
-      <div class="mb-3">
-        <label for="descripcion" class="form-label">Descripción</label>
-        <textarea class="form-control" id="descripcion" formControlName="descripcion"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea id="descripcion" class="form-control" formControlName="descripcion"></textarea>
+      <div *ngIf="updateProductForm.get('descripcion')?.invalid && (updateProductForm.get('descripcion')?.dirty || updateProductForm.get('descripcion')?.touched)">
+        <div class="text-danger" *ngIf="updateProductForm.get('descripcion')?.errors?.['required']">La descripción es requerida</div>
       </div>
-      <div class="mb-3">
-        <label for="precio" class="form-label">Precio</label>
-        <input type="number" class="form-control" id="precio" formControlName="precio">
+    </div>
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio $</label>
+      <input type="number" id="precio" class="form-control" formControlName="precio">
+      <div *ngIf="updateProductForm.get('precio')?.invalid && (updateProductForm.get('precio')?.dirty || updateProductForm.get('precio')?.touched)">
+        <div class="text-danger" *ngIf="updateProductForm.get('precio')?.errors?.['required']">El precio es requerido</div>
+        <div class="text-danger" *ngIf="updateProductForm.get('precio')?.errors?.['min']">El precio debe ser mayor o igual a 0</div>
       </div>
-      <div class="mb-3">
-        <label for="imagen" class="form-label">Imagen</label>
-        <input type="file" class="form-control" id="imagen" (change)="onFileSelected($event)">
+    </div>
+    <div class="mb-3">
+      <label for="imagen" class="form-label">Imagen</label>
+      <input type="file" id="imagen" class="form-control" (change)="onFileSelected($event)">
+      <div *ngIf="updateProductForm.get('imagen')?.invalid && (updateProductForm.get('imagen')?.dirty || updateProductForm.get('imagen')?.touched)">
+        <div class="text-danger" *ngIf="updateProductForm.get('imagen')?.errors?.['required']">La imagen es requerida</div>
+        <div class="text-danger" *ngIf="updateProductForm.get('imagen')?.errors?.['incorrect']">El archivo debe ser una imagen</div>
       </div>
-      <button type="button" class="btn btn-primary" (click)="onSave()">Guardar</button>
-    </form>
-  </div>
-  
+    </div>
+    <button type="button" class="btn btn-primary" (click)="onSave()" [disabled]="updateProductForm.invalid">Guardar</button>
+  </form>
+</div>

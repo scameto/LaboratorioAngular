@@ -23,7 +23,8 @@ export class UpdateProductComponent implements OnInit {
     this.updateProductForm = this.fb.group({
       nombre: ['', Validators.required],
       descripcion: ['', Validators.required],
-      precio: ['', Validators.required]
+      precio: ['', [Validators.required, Validators.min(0)]],
+      imagen: [null, Validators.required]
     });
   }
 
@@ -33,6 +34,10 @@ export class UpdateProductComponent implements OnInit {
       this.productService.getProductoById(productId).subscribe(product => {
         this.product = product;
         this.updateProductForm.patchValue(product);
+        if (product.imagen) {
+          this.updateProductForm.patchValue({ imagen: null });
+          this.updateProductForm.get('imagen')?.setErrors({ incorrect: true });
+        }
       });
     }
   }
@@ -40,12 +45,28 @@ export class UpdateProductComponent implements OnInit {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
+      const file = input.files[0];
+      if (file.type.match('image.*')) {
+        this.selectedFile = file;
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.updateProductForm.patchValue({ imagen: reader.result as string });
+          this.updateProductForm.get('imagen')?.setErrors(null); // Clear any existing errors
+        };
+        reader.readAsDataURL(file);
+      } else {
+        this.updateProductForm.patchValue({ imagen: null });
+        this.updateProductForm.get('imagen')?.setErrors({ incorrect: true });
+      }
+      this.updateProductForm.get('imagen')?.markAsTouched(); // Ensure validation messages are displayed
+    } else {
+      this.updateProductForm.patchValue({ imagen: null });
+      this.updateProductForm.get('imagen')?.setErrors({ incorrect: true });
     }
   }
 
   onSave(): void {
-    if(this.product){
+    if(this.updateProductForm.valid && this.product){
       const updatedProduct: Product = {
         ...this.product,
         ...this.updateProductForm.value,
@@ -57,20 +78,17 @@ export class UpdateProductComponent implements OnInit {
         reader.onload = () => {
           updatedProduct.imagen = reader.result as string;
           this.productService.updateProducto(updatedProduct).subscribe(() => {
-            //this.router.navigate(['/']);
+            this.router.navigate(['/productos/listar']);
           });
         };
         reader.readAsDataURL(this.selectedFile);
       } else {
         this.productService.updateProducto(updatedProduct).subscribe(() => {
-          //this.router.navigate(['/']);
+          this.router.navigate(['/productos/listar']);
         });
       }
-      this.router.navigate(['/productos/listar']);
-    }
-    else{
-      console.warn('this.product es null o undefined');
+    } else {
+      this.updateProductForm.markAllAsTouched(); // To ensure validation messages are displayed
     }
   }
 }
-

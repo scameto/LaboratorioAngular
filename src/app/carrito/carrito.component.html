@@ -33,8 +33,6 @@
           <div class="d-flex justify-content-end mt-3">
             <button class="btn btn-primary" (click)="finalizarPedido()">Finalizar Pedido</button>
           </div>
-          <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
-          <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
         </div>
         <ng-template #carritoVacio>
           <div class="text-center">

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CarritoService } from '../services/cart.service';
-import { UserService } from '../services/user.service'; // Asegúrate de importar UserService
-
+import { UserService } from '../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-carrito',
@@ -11,11 +11,9 @@ import { UserService } from '../services/user.service'; // Asegúrate de importa
 export class CarritoComponent {
   articulosCarrito$ = this.carritoService.carrito$;
   totalCarrito: number = 0;
-  message: string | null = null;
-  error: string | null = null;
   fechaRetiro: string = '';
 
-  constructor(private carritoService: CarritoService, private userService: UserService) {
+  constructor(private carritoService: CarritoService, private userService: UserService, private toastr: ToastrService) {
     this.articulosCarrito$.subscribe(items => {
       this.totalCarrito = items.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
     });
@@ -42,14 +40,12 @@ export class CarritoComponent {
     fechaActualDate.setHours(0, 0, 0, 0);
 
     if (!this.fechaRetiro) {
-      this.error = 'La fecha de retiro es requerida.';
-      this.message = null;
+      this.toastr.error('La fecha de retiro es requerida.');
       return;
     }
 
     if (fechaRetiroDate <= fechaActualDate) {
-      this.error = 'La fecha de retiro debe ser mayor que la fecha actual.';
-      this.message = null;
+      this.toastr.error('La fecha de retiro debe ser mayor que la fecha actual.');
       return;
     }
 
@@ -62,11 +58,8 @@ export class CarritoComponent {
       usuario: this.userService.getUsuarioAutenticado()
     };
 
-    // Guardar el pedido en localStorage
     this.carritoService.guardarPedido(pedido);
-
     this.carritoService.limpiarCarrito();
-    this.message = 'Pedido finalizado con éxito.';
-    this.error = null;
+    this.toastr.success('Pedido finalizado con éxito.');
   }
 }
