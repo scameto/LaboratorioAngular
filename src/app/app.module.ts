@@ -30,6 +30,7 @@ import { UsuarioListComponent } from './usuario-list/usuario-list.component';  /
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ConfirmDialogComponent,
     
     
+    
  
   ],
   imports: [
@@ -68,6 +70,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
       preventDuplicates: true,
       toastClass: 'ngx-toastr custom-toast',
     }),
+    ResetPasswordComponent,
   ],
   providers: [
     UserService,

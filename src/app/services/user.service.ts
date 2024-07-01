@@ -57,6 +57,11 @@ export class UserService {
   changeUserRole(id: number, newRole: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/role`, { id, newRole });
   }
+  
+  //resetear password
+  resetPassword(data: { id: string, newPassword: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/reset-password`, data);
+  }
 
 
   getUser(){
