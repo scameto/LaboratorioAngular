@@ -14,6 +14,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { AuthGuard } from './guards/auth.guard';
 import { PedidosComponent } from "./pedidos/pedidos.component";
 import { UsuarioListComponent } from "./usuario-list/usuario-list.component";
+import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'insumo/crear', component:  CreateInsumoComponent},
   { path: 'register', component: RegisterComponent},  
   { path: 'forgot-password', component: ForgotPasswordComponent},
+  { path: 'reset-password/:id', component: ResetPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },  
   { path: 'pedidos', component: PedidosComponent, canActivate: [AuthGuard] }, 
   { path: 'mis-pedidos', component: PedidosComponent, data: { modo: 'mis-pedidos' } },

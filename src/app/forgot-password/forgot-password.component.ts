@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ForgotPasswordComponent {
   forgotPasswordForm: FormGroup;
+  resetLink: string | null = null;
 
   constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
     this.forgotPasswordForm = this.fb.group({
@@ -27,6 +28,7 @@ export class ForgotPasswordComponent {
         .subscribe({
           next: (response) => {
             this.toastr.success('Se ha enviado un enlace para restablecer la contraseña a tu correo.');
+            this.resetLink = response.resetLink; //guardo el link para restablecer
           },
           error: (err) => {
             this.toastr.error('Profavor introduzca un correo electronico valido');
