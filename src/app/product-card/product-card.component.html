@@ -3,17 +3,17 @@
   (confirmAction)="handleConfirm($event)">
 </app-confirm-dialog>
 
-<div class="card mb-4 shadow-sm d-flex flex-column">
+<div class="card mb-2 shadow-sm d-flex flex-column">
   <div class="img-container">
     <img [src]="product.imagen" alt="Imagen del producto" />
   </div>
   <div class="card-body d-flex flex-column flex-grow-1">
-    <h5 class="card-title">{{ product.nombre }}</h5>
+    <h6 class="card-title">{{ product.nombre }}</h6>
     <p class="card-text">{{ product.descripcion }}</p>
-    <div class="card-precio-botones mt-auto d-flex flex-column align-items-center">
+    <div class="card-precio-botones  d-flex flex-column align-items-center">
       <div class="price-container">
         <span>Precio: {{ product.precio | currency }}</span>
-      </div><br>
+      </div>
       <div class="button-container d-flex justify-content-center">
         <!-- Botón Activar -->
         <button

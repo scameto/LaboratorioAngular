@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
   filterMinPrice: number | null = null;
   filterMaxPrice: number | null = null;
   currentPage: number = 1;
-  pageSize: number = 6;
+  pageSize: number = 12;
   totalItems: number = 0;
   totalPages: number = 0;
 
