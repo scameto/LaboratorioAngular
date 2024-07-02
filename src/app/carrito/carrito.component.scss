@@ -16,12 +16,20 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    ;
+
   }
   
   .card-header{
     background-color: #6D3D14;
     border-color: #6D3D14;
     color: #ffffff;
+  }
+
+  .card-body{
+    overflow-y: auto;
+    max-height: 80vh
+
   }
  
   
@@ -37,7 +45,8 @@
   
   .cart-item-info {
     flex: 1;
-    padding-left: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
   }
   
   .cart-item-actions {

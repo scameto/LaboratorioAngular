@@ -16,3 +16,9 @@
     justify-content: center;
 }
 
+@media (max-width: 576px) {
+    .table, .form-control, .btn{
+      font-size: 0.630rem;
+
+    }   
+  }
