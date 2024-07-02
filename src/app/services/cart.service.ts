@@ -59,6 +59,8 @@ export class CarritoService {
 
   guardarPedido(pedido: any) {
     const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
+    const newId = pedidos.length > 0 ? pedidos[pedidos.length - 1].id + 1 : 1;
+    pedido.id = newId;
     pedidos.push(pedido);
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
   }

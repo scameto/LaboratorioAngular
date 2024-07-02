@@ -175,8 +175,6 @@ export class PedidosComponent implements OnInit {
     }
   }
 
-
-
   eliminarTodosLosPedidos() {
     localStorage.removeItem('pedidos');
   }
