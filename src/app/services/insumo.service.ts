@@ -7,7 +7,7 @@ import { Insumo } from '../models/insumo';
   providedIn: 'root'
 })
 export class InsumoService {
-  private apiUrl = 'http://localhost:3000/insumos'; // Ajustar según la URL de tu API
+  private apiUrl = 'http://localhost:3000/insumos';
 
   constructor(private http: HttpClient) { }
 

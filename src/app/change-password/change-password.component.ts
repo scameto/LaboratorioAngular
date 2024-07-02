@@ -44,7 +44,7 @@ export class ChangePasswordComponent {
         },
         error: (err) => {
           this.toastr.error('La contraseña es incorrecta');
-          console.error(err); // Log para ver el error
+          console.error(err);
         }
       });
     }

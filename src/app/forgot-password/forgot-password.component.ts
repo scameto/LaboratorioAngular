@@ -28,7 +28,7 @@ export class ForgotPasswordComponent {
         .subscribe({
           next: (response) => {
             this.toastr.success('Se ha enviado un enlace para restablecer la contraseña a tu correo.');
-            this.resetLink = response.resetLink; //guardo el link para restablecer
+            this.resetLink = response.resetLink;
           },
           error: (err) => {
             this.toastr.error('Profavor introduzca un correo electronico valido');

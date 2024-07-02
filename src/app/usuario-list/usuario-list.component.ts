@@ -89,7 +89,7 @@ export class UsuarioListComponent implements OnInit {
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.loadUsers(); // Cargar usuarios de la página seleccionada
+      this.loadUsers();
     }
   }
 

@@ -88,7 +88,7 @@ export class UpdateProductComponent implements OnInit {
         });
       }
     } else {
-      this.updateProductForm.markAllAsTouched(); // To ensure validation messages are displayed
+      this.updateProductForm.markAllAsTouched();
     }
   }
 }
