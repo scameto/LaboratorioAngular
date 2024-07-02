@@ -66,7 +66,7 @@ export class InsumoListComponent implements OnInit {
         this.insumoService.deleteInsumo(this.selectedInsumoId).subscribe(
           () => {
             console.log('Insumo eliminado');
-            this.loadInsumos(); // Recargar la lista después de eliminar
+            this.loadInsumos();
           },
           (error) => {
             console.error('Error al eliminar el insumo', error);
@@ -76,7 +76,7 @@ export class InsumoListComponent implements OnInit {
         this.insumoService.restoreInsumo(this.selectedInsumoId).subscribe(
           () => {
             console.log('Insumo restaurado');
-            this.loadInsumos(); // Recargar la lista después de restaurar
+            this.loadInsumos();
           },
           (error) => {
             console.error('Error al restaurar el insumo', error);
@@ -99,7 +99,7 @@ export class InsumoListComponent implements OnInit {
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages) {
       this.currentPage = page;
-      this.loadInsumos(); // Cargar insumos de la página seleccionada
+      this.loadInsumos();
     }
   }
 

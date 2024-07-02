@@ -1,14 +1,12 @@
 <div class="container mt-5">
   <h2>Lista de Insumos</h2>
 
-  <!-- Filtro por nombre -->
   <div class="row mb-3">
     <div class="col-md-4">
       <input type="text" class="form-control" placeholder="Buscar por nombre" [(ngModel)]="filterNombre" (input)="onFilterChange()">
     </div>
   </div>
 
-  <!-- Tabla de insumos -->
   <table class="table table-striped">
     <thead>
       <tr>
@@ -43,7 +41,6 @@
     </tbody>
   </table>
 
-  <!-- Paginación -->
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">

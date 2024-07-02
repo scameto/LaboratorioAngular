@@ -4,28 +4,28 @@ body {
 
 .container {
     margin-top: 67px;
-    background-color: #6D3D14;  // Color de fondo primario
+    background-color: #6D3D14;
     padding: 2rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
-    color: #000000;  // Color del título
+    color: #000000;
 }
 
 .form-group {
     margin-bottom: 1rem;
 
     label {
-        color: #ffffff;  // Color de las etiquetas
+        color: #ffffff;
     }
 }
 
 .btn-success {
-    background-color: #2B4162;  // Color del botón de enviar
+    background-color: #2B4162;
     border: none;
     &:hover {
-        background-color: darken(#2B4162, 10%);  // Color del botón al pasar el cursor
+        background-color: darken(#2B4162, 10%);
     }
 }

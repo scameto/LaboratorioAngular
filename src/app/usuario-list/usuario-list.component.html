@@ -5,8 +5,6 @@
 
 <div class="container">
   <h2>Lista de Usuarios</h2>
-  
-  <!-- Filtros -->
   <div class="row mb-3">
     <div class="col-md-4">
       <input type="text" class="form-control" placeholder="Buscar por email" [(ngModel)]="filterEmail" (input)="onFilterChange()">
@@ -24,7 +22,6 @@
     </div>
   </div>
 
-  <!-- Tabla de usuarios -->
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -58,7 +55,6 @@
     </tbody>
   </table>
 
-  <!-- Paginación -->
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">

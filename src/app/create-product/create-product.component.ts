@@ -44,14 +44,14 @@ export class CreateProductComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.productForm.patchValue({ imagen: reader.result as string });
-        this.productForm.get('imagen')?.setErrors(null); // Clear any existing errors
+        this.productForm.get('imagen')?.setErrors(null);
       };
       reader.readAsDataURL(file);
     } else {
       this.productForm.patchValue({ imagen: null });
       this.productForm.get('imagen')?.setErrors({ incorrect: true });
     }
-    this.productForm.get('imagen')?.markAsTouched(); // Ensure validation messages are displayed
+    this.productForm.get('imagen')?.markAsTouched();
     console.log(this.productForm.value.imagen);
   }
 
@@ -96,7 +96,7 @@ export class CreateProductComponent implements OnInit {
         this.router.navigate(['/productos/listar']);
       });
     } else {
-      this.productForm.markAllAsTouched(); // To ensure validation messages are displayed
+      this.productForm.markAllAsTouched();
     }
   }
 

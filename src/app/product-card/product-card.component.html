@@ -15,7 +15,6 @@
         <span>Precio: {{ product.precio | currency }}</span>
       </div>
       <div class="button-container d-flex justify-content-center">
-        <!-- Botón Activar -->
         <button
           class="btn btn-success me-1"
           *ngIf="isAuthenticated() && isAdmin() && product.borrado"
@@ -24,7 +23,6 @@
           Activar
         </button>
 
-        <!-- Botón Eliminar -->
         <button
           class="btn btn-danger me-1"
           *ngIf="isAuthenticated() && isAdmin() && !product.borrado"
@@ -33,7 +31,6 @@
           Eliminar
         </button>
         
-        <!-- Botón Actualizar -->
         <a
           class="btn btn-warning me-1"
           *ngIf="isAuthenticated() && isAdmin()"
@@ -42,7 +39,6 @@
           Actualizar
         </a>
         
-        <!-- Botón Pedir -->
         <button class="btn btn-primary" (click)="onPedir()">Pedir</button>
       </div>
     </div>

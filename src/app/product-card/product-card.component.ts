@@ -54,8 +54,6 @@ export class ProductCardComponent implements OnInit {
           }
         );
       } else if (this.confirmType === 'activar') {
-        // Lógica para activar el producto
-        // Supongo que tienes un método para esto en tu servicio de productos
         this.productService.activateProducto(this.product.id).subscribe(
           () => {
             console.log('Producto activado');

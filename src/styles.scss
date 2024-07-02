@@ -7,25 +7,25 @@
   
     &.toast-success {
         background-color: #28a745 !important;
-        color: #fff !important; // Asegura que el texto sea visible
+        color: #fff !important; 
         display: flex !important;
         align-items: center !important;
 
         .toast-message {
             margin-left: 30px;
-            flex: 1 !important;  // Ocupa todo el espacio disponible
+            flex: 1 !important;
         }
     }
   
     &.toast-error {
         background-color: #dc3545 !important;
-        color: #fff !important; // Asegura que el texto sea visible
+        color: #fff !important;
         display: flex !important;
         align-items: center !important;
 
         .toast-message {
             margin-left: 30px;
-            flex: 1 !important;  // Ocupa todo el espacio disponible
+            flex: 1 !important;
         }
     }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PedidoService } from '../services/pedidos.service'; // Asegúrate de tener este servicio
+import { PedidoService } from '../services/pedidos.service';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
@@ -105,7 +105,6 @@ export class PedidosComponent implements OnInit {
     return articulo.producto.insumos.map((insumo: any) => {
       const detalleInsumo = this.insumos.find(i => i.id === insumo.insumoId);
       if (!detalleInsumo) {
-        //console.error(`Insumo con ID ${insumo.insumoId} no encontrado.`);
       }
       return {
         nombre: detalleInsumo ? detalleInsumo.nombre : 'Insumo desconocido',

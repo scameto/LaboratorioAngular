@@ -26,7 +26,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { AuthGuard } from './guards/auth.guard';
-import { UsuarioListComponent } from './usuario-list/usuario-list.component';  // Asegúrate de importar el guardián de autenticación
+import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -66,7 +66,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     ChangePasswordComponent,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right', // Puedes cambiar esto a la posición que desees
+      positionClass: 'toast-bottom-right',
       preventDuplicates: true,
       toastClass: 'ngx-toastr custom-toast',
     }),

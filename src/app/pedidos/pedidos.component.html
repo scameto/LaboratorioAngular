@@ -3,7 +3,7 @@
     <h2 class="text-center">Pedidos</h2>
   </div>
 
-  <!-- Filtros -->
+   Filtros -->
   <div *ngIf="!modoMisPedidos && !isUser()" class="mb-4">
     <div class="row">
       <div class="col-md-3">
@@ -37,7 +37,7 @@
     </div>
   </div>
 
-  <!-- Listado de Pedidos -->
+   Listado de Pedidos -->
   <div *ngIf="!mostrarInsumos">
     <div *ngFor="let pedido of pedidosFiltrados" class="card mb-4 shadow-sm">
       <div class="card-body">
@@ -103,7 +103,7 @@
     </div>
   </div>
 
-  <!-- Total de Insumos -->
+   Total de Insumos -->
   <div *ngIf="mostrarInsumos && totalInsumos.length > 0" class="mt-5">
     <h3 class="card-header text-center">Total de Insumos</h3>
     <table class="table table-striped">

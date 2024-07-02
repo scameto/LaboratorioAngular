@@ -51,14 +51,14 @@ export class UpdateProductComponent implements OnInit {
         const reader = new FileReader();
         reader.onload = () => {
           this.updateProductForm.patchValue({ imagen: reader.result as string });
-          this.updateProductForm.get('imagen')?.setErrors(null); // Clear any existing errors
+          this.updateProductForm.get('imagen')?.setErrors(null);
         };
         reader.readAsDataURL(file);
       } else {
         this.updateProductForm.patchValue({ imagen: null });
         this.updateProductForm.get('imagen')?.setErrors({ incorrect: true });
       }
-      this.updateProductForm.get('imagen')?.markAsTouched(); // Ensure validation messages are displayed
+      this.updateProductForm.get('imagen')?.markAsTouched();
     } else {
       this.updateProductForm.patchValue({ imagen: null });
       this.updateProductForm.get('imagen')?.setErrors({ incorrect: true });
@@ -70,7 +70,7 @@ export class UpdateProductComponent implements OnInit {
       const updatedProduct: Product = {
         ...this.product,
         ...this.updateProductForm.value,
-        imagen: this.product.imagen // Placeholder for now
+        imagen: this.product.imagen
       };
 
       if (this.selectedFile) {

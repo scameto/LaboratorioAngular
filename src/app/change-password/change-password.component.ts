@@ -16,10 +16,10 @@ export class ChangePasswordComponent {
   changePasswordForm: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: UserService, private toastr: ToastrService) {
-    const userId = localStorage.getItem('id'); // Obtiene el ID del usuario desde el local storage
+    const userId = localStorage.getItem('id');
 
     this.changePasswordForm = this.fb.group({
-      id: [{ value: userId, disabled: true }, [Validators.required]], // Establece el ID y lo deshabilita
+      id: [userId, [Validators.required]],
       oldPassword: ['', [Validators.required]],
       newPassword: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]]
@@ -33,7 +33,7 @@ export class ChangePasswordComponent {
   onSubmit() {
     if (this.changePasswordForm.valid) {
       const data = {
-        id: this.changePasswordForm.getRawValue().id, // Obtiene el ID deshabilitado
+        id: this.changePasswordForm.value.id,
         oldPassword: this.changePasswordForm.value.oldPassword,
         newPassword: this.changePasswordForm.value.newPassword
       };
