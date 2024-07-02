@@ -65,8 +65,8 @@ export class PedidosComponent implements OnInit {
   filtrarPedidos() {
     this.pedidosFiltrados = this.pedidos.filter(pedido => {
       const matchesEstado = this.filtros.estado ? pedido.estado === this.filtros.estado : true;
-      const matchesFechaDesde = this.filtros.fechaDesde ? new Date(pedido.fechaPedido) >= new Date(this.filtros.fechaDesde) : true;
-      const matchesFechaHasta = this.filtros.fechaHasta ? new Date(pedido.fechaPedido) <= new Date(this.filtros.fechaHasta) : true;
+      const matchesFechaDesde = this.filtros.fechaDesde ? new Date(pedido.fechaRetiro) >= new Date(this.filtros.fechaDesde) : true;
+      const matchesFechaHasta = this.filtros.fechaHasta ? new Date(pedido.fechaRetiro) <= new Date(this.filtros.fechaHasta) : true;
       const matchesCliente = this.filtros.cliente ? pedido.usuario && pedido.usuario.email.includes(this.filtros.cliente) : true;
       return matchesEstado && matchesFechaDesde && matchesFechaHasta && matchesCliente;
     });
