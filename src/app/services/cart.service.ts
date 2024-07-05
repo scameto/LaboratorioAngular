@@ -1,5 +1,6 @@
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 export class CarritoService {
   private carritoSubject = new BehaviorSubject<any[]>([]);
   carrito$ = this.carritoSubject.asObservable();
+  private apiUrl = 'http://localhost:3000/pedidos';
+
+  constructor(private http: HttpClient){};
 
   agregarAlCarrito(producto: any) {
     const carrito = this.carritoSubject.getValue();
@@ -57,11 +61,8 @@ export class CarritoService {
     localStorage.setItem('carrito', JSON.stringify(this.carritoSubject.getValue()));
   }
 
-  guardarPedido(pedido: any) {
-    const pedidos = JSON.parse(localStorage.getItem('pedidos') || '[]');
-    const newId = pedidos.length > 0 ? pedidos[pedidos.length - 1].id + 1 : 1;
-    pedido.id = newId;
-    pedidos.push(pedido);
-    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+  guardarPedido(pedido: any): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(this.apiUrl, pedido, { headers });
   }
 }

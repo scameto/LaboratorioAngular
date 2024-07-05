@@ -58,8 +58,14 @@ export class CarritoComponent {
       usuario: this.userService.getUsuarioAutenticado()
     };
 
-    this.carritoService.guardarPedido(pedido);
-    this.carritoService.limpiarCarrito();
-    this.toastr.success('Pedido finalizado con éxito.');
+    this.carritoService.guardarPedido(pedido).subscribe(
+      response => {
+        this.carritoService.limpiarCarrito();
+        this.toastr.success('Pedido finalizado con éxito.');
+      },
+      error => {
+        this.toastr.error('Error al finalizar el pedido.');
+      }
+    );
   }
 }
