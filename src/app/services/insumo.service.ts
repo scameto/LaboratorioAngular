@@ -43,4 +43,8 @@ export class InsumoService {
     return this.http.get<Insumo>(`${this.apiUrl}/${id}`);
   }
 
+  getInsumosByIds(ids: number[]): Observable<Insumo[]> {
+    const params = new HttpParams().set('ids', ids.join(','));
+    return this.http.get<Insumo[]>(`${this.apiUrl}/batch`, { params });
+  }
 }
