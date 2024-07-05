@@ -14,6 +14,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { UsuarioListComponent } from "./usuario-list/usuario-list.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
 import { PedidosListComponent } from "./pedidos-list/pedidos-list.component";
+import { CarritoComponent } from "./carrito/carrito.component";
+import { PedidosComponent } from "./pedidos/pedidos.component";
 
 
 const routes: Routes = [
@@ -21,6 +23,9 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'usuarios/listar', component: UsuarioListComponent },
   { path: 'productos/listar', component: ProductListComponent},
+  { path: 'carrito', component: CarritoComponent, canActivate: [() => inject(AuthGuard).canActivate()] },
+  { path: 'pedidos', component: PedidosComponent, canActivate: [AuthGuard] }, 
+  { path: 'mis-pedidos', component: PedidosComponent, data: { modo: 'mis-pedidos' } },
   { path: 'cuenta', component: CuentaComponent, canActivate: [() => inject(AuthGuard).canActivate()] },
   { path: 'producto/crear', component: CreateProductComponent },
   { path: 'producto/update/:id', component: UpdateProductComponent },
@@ -30,7 +35,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'reset-password/:id', component: ResetPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },  
-  { path: 'pedidos', component: PedidosListComponent },  
+  //{ path: 'pedidos', component: PedidosListComponent },  
   { path: '**', redirectTo: 'productos/listar' },
 
 

@@ -30,6 +30,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
+import { CarritoComponent } from './carrito/carrito.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 
 @NgModule({
@@ -48,6 +50,8 @@ import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
     UsuarioListComponent,
     ConfirmDialogComponent,
     PedidosListComponent,
+    CarritoComponent,
+    PedidosComponent,
     
     
     
