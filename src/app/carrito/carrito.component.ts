@@ -1,8 +1,8 @@
-
 import { Component } from '@angular/core';
-import { CarritoService } from '../services/cart.service';
-import { UserService } from '../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { PedidoService } from '../services/pedidos.service';
+import { Pedido } from '../models/pedido';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-carrito',
@@ -10,27 +10,58 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./carrito.component.scss']
 })
 export class CarritoComponent {
-  articulosCarrito$ = this.carritoService.carrito$;
+  articulosCarrito: any[] = [];
   totalCarrito: number = 0;
   fechaRetiro: string = '';
 
-  constructor(private carritoService: CarritoService, private userService: UserService, private toastr: ToastrService) {
-    this.articulosCarrito$.subscribe(items => {
-      this.totalCarrito = items.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
-    });
+  constructor(
+    private authService: AuthService,
+    private toastr: ToastrService,
+    private pedidoService: PedidoService
+  ) {
+    this.cargarCarrito();
+    this.calcularTotalCarrito();
+  }
+
+  private cargarCarrito() {
+    const carritoGuardado = localStorage.getItem('carrito');
+    if (carritoGuardado) {
+      this.articulosCarrito = JSON.parse(carritoGuardado);
+    }
+  }
+
+  private guardarCarrito() {
+    localStorage.setItem('carrito', JSON.stringify(this.articulosCarrito));
+  }
+
+  private calcularTotalCarrito() {
+    this.totalCarrito = this.articulosCarrito.reduce((total, item) => total + item.producto.precio * item.cantidad, 0);
   }
 
   onEliminar(producto: any) {
-    this.carritoService.eliminarDelCarrito(producto);
+    const index = this.articulosCarrito.findIndex(item => item.producto.id === producto.id);
+    if (index !== -1) {
+      this.articulosCarrito.splice(index, 1);
+      this.guardarCarrito();
+      this.calcularTotalCarrito();
+    }
   }
 
   onAumentarCantidad(articulo: any) {
-    this.carritoService.actualizarCantidad(articulo.producto, articulo.cantidad + 1);
+    const productoExistente = this.articulosCarrito.find(item => item.producto.id === articulo.producto.id);
+    if (productoExistente) {
+      productoExistente.cantidad += 1;
+      this.guardarCarrito();
+      this.calcularTotalCarrito();
+    }
   }
 
   onDisminuirCantidad(articulo: any) {
-    if (articulo.cantidad > 1) {
-      this.carritoService.actualizarCantidad(articulo.producto, articulo.cantidad - 1);
+    const productoExistente = this.articulosCarrito.find(item => item.producto.id === articulo.producto.id);
+    if (productoExistente && productoExistente.cantidad > 1) {
+      productoExistente.cantidad -= 1;
+      this.guardarCarrito();
+      this.calcularTotalCarrito();
     }
   }
 
@@ -50,23 +81,41 @@ export class CarritoComponent {
       return;
     }
 
-    const pedido = {
-      fechaPedido,
-      fechaRetiro: this.fechaRetiro,
-      articulos: this.carritoService.getCarrito(),
-      total: this.totalCarrito,
+    if (!this.authService.isAuthenticated()) {
+      this.toastr.error('Usuario no autenticado.');
+      return;
+    }
+
+    const articulos = this.articulosCarrito.map(articulo => ({
+      productoId: articulo.producto.id,
+      cantidad: articulo.cantidad
+    }));
+
+    const userId = Number(localStorage.getItem('id')); 
+
+    const pedido: Pedido = {
+      id: 0,
+      fechaPedido: new Date(),
+      fechaEntrega: fechaRetiroDate,
       estado: 'pendiente',
-      usuario: this.userService.getUsuarioAutenticado()
+      userId: userId,
+      productos: articulos
     };
 
-    this.carritoService.guardarPedido(pedido).subscribe(
+    this.pedidoService.createPedido(pedido).subscribe(
       response => {
-        this.carritoService.limpiarCarrito();
+        this.limpiarCarrito();
         this.toastr.success('Pedido finalizado con éxito.');
       },
       error => {
         this.toastr.error('Hubo un problema al finalizar el pedido.');
       }
     );
+  }
+
+  limpiarCarrito() {
+    this.articulosCarrito = [];
+    this.guardarCarrito();
+    this.calcularTotalCarrito();
   }
 }
