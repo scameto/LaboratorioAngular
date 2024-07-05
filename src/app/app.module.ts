@@ -14,7 +14,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductListComponent } from './product-list/product-list.component';
 import { AuthInterceptor } from './services/auth-interceptor.service';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { CarritoComponent } from './carrito/carrito.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -24,13 +23,13 @@ import { InsumoListComponent } from './insumo-list/insumo-list.component';
 import { CreateInsumoComponent } from './create-insumo/create-insumo.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { PedidosComponent } from './pedidos/pedidos.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UsuarioListComponent } from './usuario-list/usuario-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
 
 
 @NgModule({
@@ -40,16 +39,15 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterComponent,
     ProductListComponent,
     ProductCardComponent,
-    CarritoComponent,
     CuentaComponent,
     NavbarComponent,
     CreateProductComponent,
     UpdateProductComponent,
     InsumoListComponent,
     CreateInsumoComponent,
-    PedidosComponent,
     UsuarioListComponent,
     ConfirmDialogComponent,
+    PedidosListComponent,
     
     
     
