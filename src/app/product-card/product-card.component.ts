@@ -26,7 +26,7 @@ export class ProductCardComponent implements OnInit {
 
   onPedir(): void {
     this.cartService.agregarAlCarrito(this.product);
-    console.log(`Pedido realizado para el producto: ${this.product.nombre}`);
+    this.toastr.success(`Producto agregado al carrito`);
   }
 
   onEliminar() {
