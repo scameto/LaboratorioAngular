@@ -37,6 +37,18 @@
   .card-header h3 {
     font-size: 1.75rem;
   }
+  #toast-container {
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    padding: 0 10px;
+  }
+
+  .toast {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
 }
 
 
