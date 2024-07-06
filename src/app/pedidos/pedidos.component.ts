@@ -192,6 +192,7 @@ import { Pedido } from '../models/pedido';
 import { Product } from '../models/product';
 import { Insumo } from '../models/insumo';
 import { PedidoService } from '../services/pedidos.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -203,15 +204,51 @@ export class PedidosComponent implements OnInit {
   productos: { [key: number]: Product } = {};
   insumos: { [key: number]: Insumo } = {};
   insumosVisible: { [key: number]: boolean } = {};
+  modoMisPedidos: boolean = false;
+  filtros = {
+    estado: '',
+    fechaDesde: '',
+    fechaHasta: '',
+    cliente: ''
+  };
+  pedidosFiltrados: any[] = [];
+  mostrarInsumos: boolean = false;
 
   constructor(
     private pedidoService: PedidoService,
     private productService: ProductService,
-    private insumoService: InsumoService
+    private insumoService: InsumoService,
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
     this.loadInsumos();
+  }
+
+  toggleMostrarInsumos() {
+    this.filtrarPedidos();
+    this.mostrarInsumos = !this.mostrarInsumos;
+  }
+
+  limpiarFiltros() {
+    this.filtros = {
+      estado: '',
+      fechaDesde: '',
+      fechaHasta: '',
+      cliente: ''
+    };
+    this.filtrarPedidos();
+  }
+
+  filtrarPedidos() {
+    this.pedidosFiltrados = this.pedidos.filter(pedido => {
+      const matchesEstado = this.filtros.estado ? pedido.estado === this.filtros.estado : true;
+      const matchesFechaDesde = this.filtros.fechaDesde ? new Date(pedido.fechaEntrega) >= new Date(this.filtros.fechaDesde) : true;
+      const matchesFechaHasta = this.filtros.fechaHasta ? new Date(pedido.fechaEntrega) <= new Date(this.filtros.fechaHasta) : true;
+     // const matchesCliente = this.filtros.cliente ? pedido.usuario && pedido.usuario.email.includes(this.filtros.cliente) : true;
+      return matchesEstado && matchesFechaDesde && matchesFechaHasta; //&& matchesCliente;
+    });
+    //this.calcularTotalInsumos();
   }
 
   loadInsumos(): void {
@@ -231,6 +268,8 @@ export class PedidosComponent implements OnInit {
       this.pedidos = pedidos;
       console.log('Pedidos cargados:', this.pedidos);  // Debug
       this.loadProductos();
+      this.pedidosFiltrados = pedidos
+
     });
   }
 
@@ -248,6 +287,17 @@ export class PedidosComponent implements OnInit {
       });
     });
   }
+  isUser(){
+    return this.authService.getUserRole() === 'USER' ;
+  }
+
+  isAdmin() {
+    return this.authService.getUserRole() === 'ADMIN';
+  }
+
+  isAuthenticated(){
+    return this.authService.isAuthenticated();
+  }
 
   assignInsumosToProduct(product: Product): void {
     if (product && product.insumos) {
@@ -264,6 +314,6 @@ export class PedidosComponent implements OnInit {
       console.error('Error: producto o productoInsumos no definidos');
     }
   }
-
+  
 
 }
