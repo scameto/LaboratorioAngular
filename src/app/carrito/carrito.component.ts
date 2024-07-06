@@ -95,8 +95,6 @@ export class CarritoComponent {
 
     const pedido: Pedido = new Pedido(0,new Date(), fechaRetiroDate,'Pendiente', userId, articulos)
 
-    
-
     this.pedidoService.createPedido(pedido).subscribe(
       response => {
         this.limpiarCarrito();
@@ -106,12 +104,14 @@ export class CarritoComponent {
         this.toastr.error('Hubo un problema al finalizar el pedido.');
       }
     );
+    window.location.reload()
   }
 
   limpiarCarrito() {
     this.articulosCarrito = [];
     this.guardarCarrito();
-    localStorage.removeItem('carrito');
+    //localStorage.removeItem('carrito');
     this.calcularTotalCarrito();
+    
   }
 }

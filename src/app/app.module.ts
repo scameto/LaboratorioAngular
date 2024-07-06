@@ -29,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { PedidosCardComponent } from './pedidos-card/pedidos-card.component';
@@ -51,7 +50,6 @@ import { ProductosPedidosCardComponent } from './productos-pedidos-card/producto
     CreateInsumoComponent,
     UsuarioListComponent,
     ConfirmDialogComponent,
-    PedidosListComponent,
     CarritoComponent,
     PedidosComponent,
     PedidosCardComponent,

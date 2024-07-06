@@ -13,7 +13,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { AuthGuard } from './guards/auth.guard';
 import { UsuarioListComponent } from "./usuario-list/usuario-list.component";
 import { ResetPasswordComponent } from "./reset-password/reset-password.component";
-import { PedidosListComponent } from "./pedidos-list/pedidos-list.component";
 import { CarritoComponent } from "./carrito/carrito.component";
 import { PedidosComponent } from "./pedidos/pedidos.component";
 
@@ -35,7 +34,6 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent},
   { path: 'reset-password/:id', component: ResetPasswordComponent },
   { path: 'change-password', component: ChangePasswordComponent },  
-  //{ path: 'pedidos', component: PedidosListComponent },  
   { path: '**', redirectTo: 'productos/listar' },
 
 

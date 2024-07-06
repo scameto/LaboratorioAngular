@@ -108,7 +108,7 @@ export class PedidosComponent implements OnInit {
     this.pedidoService.getPedidosByUserId(Number(localStorage.getItem('id'))).subscribe(pedidos => {
       this.pedidos = pedidos;
       this.loadProductos();
-      this.pedidosFiltrados = pedidos; // Inicializar pedidosFiltrados con todos los pedidos cargados
+      this.pedidosFiltrados = pedidos;
       this.updatePagination();
     });
   }
@@ -117,7 +117,7 @@ export class PedidosComponent implements OnInit {
     this.pedidoService.getPedidos().subscribe(pedidos => {
       this.pedidos = pedidos;
       this.loadProductos();
-      this.pedidosFiltrados = pedidos; // Inicializar pedidosFiltrados con todos los pedidos cargados
+      this.pedidosFiltrados = pedidos;
       this.updatePagination();
     });
   }
