@@ -25,8 +25,14 @@ export class PedidosComponent implements OnInit {
     fechaHasta: '',
     cliente: ''
   };
-  pedidosFiltrados: any[] = [];
+  pedidosFiltrados: Pedido[] = [];
+  pedidosMostrando: Pedido[] = [];
   mostrarInsumos: boolean = false;
+  totalInsumos: { [key: number]: number } = {};
+  currentPage: number = 1;
+  pageSize: number = 6;
+  totalItems: number = 0;
+  totalPages: number = 0;
 
   constructor(
     private pedidoService: PedidoService,
@@ -36,11 +42,10 @@ export class PedidosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(this.authService.isAuthenticated() && this.authService.getUserRole() === 'USER'){
+    if (this.authService.isAuthenticated() && this.authService.getUserRole() === 'USER') {
       this.esUsuario = true;
       this.loadInsumosUser();
-    }
-    else{
+    } else {
       this.loadInsumos();
     }
   }
@@ -50,16 +55,21 @@ export class PedidosComponent implements OnInit {
       insumos.forEach(insumo => {
         this.insumos[insumo.id] = insumo;
       });
-      console.log('Insumos cargados:', this.insumos);  // Debug
       this.loadPedidosUser();
     }, error => {
-      console.error('Error al cargar todos los insumos:', error);  // Debug
+      console.error('Error al cargar todos los insumos:', error);
     });
   }
 
   toggleMostrarInsumos() {
-    this.filtrarPedidos();
+    if (!this.mostrarInsumos) {
+      this.totalInsumos = this.calculateTotalInsumos();
+    }
     this.mostrarInsumos = !this.mostrarInsumos;
+  }
+
+  getInsumoIds(): number[] {
+    return Object.keys(this.totalInsumos).map(id => Number(id));
   }
 
   limpiarFiltros() {
@@ -77,10 +87,10 @@ export class PedidosComponent implements OnInit {
       const matchesEstado = this.filtros.estado ? pedido.estado === this.filtros.estado : true;
       const matchesFechaDesde = this.filtros.fechaDesde ? new Date(pedido.fechaEntrega) >= new Date(this.filtros.fechaDesde) : true;
       const matchesFechaHasta = this.filtros.fechaHasta ? new Date(pedido.fechaEntrega) <= new Date(this.filtros.fechaHasta) : true;
-     // const matchesCliente = this.filtros.cliente ? pedido.usuario && pedido.usuario.email.includes(this.filtros.cliente) : true;
-      return matchesEstado && matchesFechaDesde && matchesFechaHasta; //&& matchesCliente;
+      return matchesEstado && matchesFechaDesde && matchesFechaHasta;
     });
-    //this.calcularTotalInsumos();
+    this.currentPage = 1;
+    this.updatePagination();
   }
 
   loadInsumos(): void {
@@ -88,28 +98,27 @@ export class PedidosComponent implements OnInit {
       insumos.forEach(insumo => {
         this.insumos[insumo.id] = insumo;
       });
-      console.log('Insumos cargados:', this.insumos);  // Debug
       this.loadPedidos();
     }, error => {
-      console.error('Error al cargar todos los insumos:', error);  // Debug
+      console.error('Error al cargar todos los insumos:', error);
     });
   }
 
   loadPedidosUser(): void {
     this.pedidoService.getPedidosByUserId(Number(localStorage.getItem('id'))).subscribe(pedidos => {
       this.pedidos = pedidos;
-      console.log('Pedidos cargados:', this.pedidos);  // Debug
       this.loadProductos();
+      this.pedidosFiltrados = pedidos; // Inicializar pedidosFiltrados con todos los pedidos cargados
+      this.updatePagination();
     });
   }
 
   loadPedidos(): void {
     this.pedidoService.getPedidos().subscribe(pedidos => {
       this.pedidos = pedidos;
-      console.log('Pedidos cargados:', this.pedidos);  // Debug
       this.loadProductos();
-      this.pedidosFiltrados = pedidos
-
+      this.pedidosFiltrados = pedidos; // Inicializar pedidosFiltrados con todos los pedidos cargados
+      this.updatePagination();
     });
   }
 
@@ -122,35 +131,33 @@ export class PedidosComponent implements OnInit {
     productIds.forEach(id => {
       this.productService.getProductoById(id).subscribe(producto => {
         this.productos[id] = producto;
-        console.log('Producto cargado:', producto);  // Debug
         this.assignInsumosToProduct(producto);
       });
     });
   }
-  
-  isUser(){
-    return this.authService.getUserRole() === 'USER' ;
+
+  isUser() {
+    return this.authService.getUserRole() === 'USER';
   }
 
   isAdmin() {
     return this.authService.getUserRole() === 'ADMIN';
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     return this.authService.isAuthenticated();
   }
 
   assignInsumosToProduct(product: Product): void {
     if (product && product.insumos) {
       product.insumos.forEach(pi => {
-        const insumo = this.insumos[pi.insumoId];        
+        const insumo = this.insumos[pi.insumoId];
         if (insumo) {
           pi.insumoId = Number(insumo.id);
         } else {
           console.warn(`Insumo con ID ${pi.insumoId} no encontrado para el producto ${product.nombre}`);
         }
       });
-      console.log('Producto con insumos asignados:', product);  // Debug
     } else {
       console.error('Error: producto o productoInsumos no definidos');
     }
@@ -171,5 +178,45 @@ export class PedidosComponent implements OnInit {
         console.error('Error al actualizar el pedido:', error);
       }
     );
+  }
+
+  calculateTotalInsumos(): { [key: number]: number } {
+    const totalInsumos: { [key: number]: number } = {};
+
+    this.pedidosMostrando.forEach(pedido => {
+      pedido.productos.forEach((item: any) => {
+        const product = this.productos[item.productoId];
+        if (product && product.insumos) {
+          product.insumos.forEach(pi => {
+            if (totalInsumos[pi.insumoId]) {
+              totalInsumos[pi.insumoId] += pi.cantidad * item.cantidad;
+            } else {
+              totalInsumos[pi.insumoId] = pi.cantidad * item.cantidad;
+            }
+          });
+        }
+      });
+    });
+
+    return totalInsumos;
+  }
+
+  onPageChange(page: number): void {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.updatePagination();
+    }
+  }
+
+  updatePagination(): void {
+    const start = (this.currentPage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pedidosMostrando = this.pedidosFiltrados.slice(start, end);
+    this.totalItems = this.pedidosFiltrados.length;
+    this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+  }
+
+  getPagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 }

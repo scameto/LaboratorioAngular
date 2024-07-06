@@ -10,7 +10,8 @@ import { Product } from '../models/product';
 export class ProductosPedidosCardComponent {
   @Input() insumos!: { [key: number]: Insumo };
   @Input() producto!: Product;
-  @Input() cantidad!: number
+  @Input() cantidad!: number;
+  @Input() esUsuario!: boolean;
   insumosVisible = false;
 
   toggleInsumos(): void {

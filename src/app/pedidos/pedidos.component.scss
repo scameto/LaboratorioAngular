@@ -64,6 +64,50 @@
     color: #f6f6f6;  
     font-weight: bold;
   }
+
+  /* Estilos para la sección de insumos totales */
+.table {
+  margin-top: 20px;
+  border: 1px solid #dee2e6;
+  
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  th {
+    background-color: #f8f9fa;
+  }
+
+  tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2;
+  }
+  
+  tbody tr:hover {
+    background-color: #e9ecef;
+  }
+}
+
+.scrollable-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+h3{
+  background-color: #6D3D14;
+  color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  border-color: #ffffff;
+  border: solid 1px;
+  justify-content: center;
+  display: flex;
+}
+
+button.btn-primary {
+  margin: 20px 0;
+}
+
   
   @media (max-width: 800px) {
     .w-sm-auto {

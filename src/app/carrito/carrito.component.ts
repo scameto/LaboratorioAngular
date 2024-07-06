@@ -93,14 +93,9 @@ export class CarritoComponent {
 
     const userId = Number(localStorage.getItem('id')); 
 
-    const pedido: Pedido = {
-      id: 0,
-      fechaPedido: new Date(),
-      fechaEntrega: fechaRetiroDate,
-      estado: 'pendiente',
-      userId: userId,
-      productos: articulos
-    };
+    const pedido: Pedido = new Pedido(0,new Date(), fechaRetiroDate,'Pendiente', userId, articulos)
+
+    
 
     this.pedidoService.createPedido(pedido).subscribe(
       response => {

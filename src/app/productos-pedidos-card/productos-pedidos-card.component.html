@@ -3,7 +3,7 @@
     <div class="media-body">
       <h5 class="mt-0">{{ producto.nombre }}</h5>
       <p>Cantidad: {{ cantidad }}</p>
-      <button class="btn btn-primary" (click)="toggleInsumos()">
+      <button class="btn btn-primary" *ngIf="!esUsuario" (click)="toggleInsumos()">
         {{ insumosVisible ? 'Ocultar Insumos' : 'Mostrar Insumos' }}
       </button>
       <div *ngIf="insumosVisible">
@@ -19,7 +19,7 @@
           <tbody>
              <tr *ngFor="let pi of producto.insumos">
             <td>{{ insumos[pi.insumoId].nombre || 'Desconocido' }}</td>
-            <td>{{ pi.cantidad }}</td>
+            <td>{{ pi.cantidad * cantidad }}</td>
             <td>{{ insumos[pi.insumoId].unidad_medida || 'N/A' }}</td> 
           </tr>
           </tbody>

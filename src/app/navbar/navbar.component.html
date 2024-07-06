@@ -10,11 +10,8 @@
       <li class="nav-item" *ngIf="isAuthenticated()">
         <a class="nav-link" routerLink="/listar " (click)="collapseNavbar(navbarNav)">Productos</a>
       </li>
-      <li class="nav-item" *ngIf="isAuthenticated() && !isUser()">
+      <li class="nav-item" *ngIf="isAuthenticated()">
         <a class="nav-link" routerLink="/pedidos" (click)="collapseNavbar(navbarNav)">Pedidos</a>
-      </li>
-      <li class="nav-item" *ngIf="isAuthenticated() && isUser()">
-        <a class="nav-link" routerLink="/mis-pedidos" (click)="collapseNavbar(navbarNav)">Mis Pedidos</a>
       </li>
       <li class="nav-item" *ngIf="isAuthenticated() && isAdmin()">
         <a class="nav-link" routerLink="/producto/crear" (click)="collapseNavbar(navbarNav)">Crear producto</a>

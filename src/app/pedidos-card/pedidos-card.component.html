@@ -1,14 +1,14 @@
 <div class="card">
     <div class="card-header">
-      <h5>Pedido #{{ pedido.id }}</h5>
+      <h5 *ngIf="!esUsuario">Pedido #{{ pedido.id }}</h5>
       <p>Fecha de Pedido: {{ pedido.fechaPedido | date }}</p>
       <p>Fecha de Entrega: {{ pedido.fechaEntrega | date }}</p>
       <p>Estado: {{ pedido.estado }}</p>
     </div>
     <button class="btn btn-primary" *ngIf="!esUsuario" (click)="onCambiarEstadoPedido()">Cambiar Estado</button>
-    <div class="card-body">
+    <div class="card-body scrollable-container">
       <div *ngFor="let item of pedido.productos">
-        <app-productos-pedidos-card *ngIf="productos[item.productoId]" [insumos]="insumos" [producto]="productos[item.productoId]" [cantidad]="item.cantidad"/> 
+        <app-productos-pedidos-card *ngIf="productos[item.productoId]" [insumos]="insumos" [producto]="productos[item.productoId]" [cantidad]="item.cantidad" [esUsuario]="esUsuario"/> 
       </div>
     </div>
   </div>
