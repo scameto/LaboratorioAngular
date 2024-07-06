@@ -6,6 +6,7 @@ import { Product } from '../models/product';
 import { Insumo } from '../models/insumo';
 import { PedidoService } from '../services/pedidos.service';
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-pedidos',
@@ -38,7 +39,8 @@ export class PedidosComponent implements OnInit {
     private pedidoService: PedidoService,
     private productService: ProductService,
     private insumoService: InsumoService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -173,9 +175,11 @@ export class PedidosComponent implements OnInit {
     this.pedidoService.updatePedido(pedido).subscribe(
       updatedPedido => {
         console.log('Pedido actualizado:', updatedPedido);
+        this.toastr.success(`Estado del pedido actualizado`);
       },
       error => {
         console.error('Error al actualizar el pedido:', error);
+        this.toastr.error(`Error al actualizar el estado del pedido`);
       }
     );
   }
