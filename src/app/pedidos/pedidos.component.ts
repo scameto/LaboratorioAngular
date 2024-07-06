@@ -17,7 +17,16 @@ export class PedidosComponent implements OnInit {
   productos: { [key: number]: Product } = {};
   insumos: { [key: number]: Insumo } = {};
   insumosVisible: { [key: number]: boolean } = {};
-  isUser: boolean = false;
+  esUsuario: boolean = false;
+  modoMisPedidos: boolean = false;
+  filtros = {
+    estado: '',
+    fechaDesde: '',
+    fechaHasta: '',
+    cliente: ''
+  };
+  pedidosFiltrados: any[] = [];
+  mostrarInsumos: boolean = false;
 
   constructor(
     private pedidoService: PedidoService,
@@ -28,7 +37,7 @@ export class PedidosComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.authService.isAuthenticated() && this.authService.getUserRole() === 'USER'){
-      this.isUser = true;
+      this.esUsuario = true;
       this.loadInsumosUser();
     }
     else{
@@ -46,6 +55,32 @@ export class PedidosComponent implements OnInit {
     }, error => {
       console.error('Error al cargar todos los insumos:', error);  // Debug
     });
+  }
+
+  toggleMostrarInsumos() {
+    this.filtrarPedidos();
+    this.mostrarInsumos = !this.mostrarInsumos;
+  }
+
+  limpiarFiltros() {
+    this.filtros = {
+      estado: '',
+      fechaDesde: '',
+      fechaHasta: '',
+      cliente: ''
+    };
+    this.filtrarPedidos();
+  }
+
+  filtrarPedidos() {
+    this.pedidosFiltrados = this.pedidos.filter(pedido => {
+      const matchesEstado = this.filtros.estado ? pedido.estado === this.filtros.estado : true;
+      const matchesFechaDesde = this.filtros.fechaDesde ? new Date(pedido.fechaEntrega) >= new Date(this.filtros.fechaDesde) : true;
+      const matchesFechaHasta = this.filtros.fechaHasta ? new Date(pedido.fechaEntrega) <= new Date(this.filtros.fechaHasta) : true;
+     // const matchesCliente = this.filtros.cliente ? pedido.usuario && pedido.usuario.email.includes(this.filtros.cliente) : true;
+      return matchesEstado && matchesFechaDesde && matchesFechaHasta; //&& matchesCliente;
+    });
+    //this.calcularTotalInsumos();
   }
 
   loadInsumos(): void {
@@ -73,6 +108,8 @@ export class PedidosComponent implements OnInit {
       this.pedidos = pedidos;
       console.log('Pedidos cargados:', this.pedidos);  // Debug
       this.loadProductos();
+      this.pedidosFiltrados = pedidos
+
     });
   }
 
@@ -89,6 +126,18 @@ export class PedidosComponent implements OnInit {
         this.assignInsumosToProduct(producto);
       });
     });
+  }
+  
+  isUser(){
+    return this.authService.getUserRole() === 'USER' ;
+  }
+
+  isAdmin() {
+    return this.authService.getUserRole() === 'ADMIN';
+  }
+
+  isAuthenticated(){
+    return this.authService.isAuthenticated();
   }
 
   assignInsumosToProduct(product: Product): void {
