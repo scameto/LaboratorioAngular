@@ -121,10 +121,10 @@
 </div> -->
 <div class="container mt-4">
     <div class="row">
-      <div *ngFor="let pedido of pedidos" class="col-md-4 mb-4">
-        <app-pedidos-card [pedido]="pedido" [productos]="productos" [insumos]="insumos"></app-pedidos-card>
-      </div>
+        <div *ngFor="let pedido of pedidos" class="col-md-4 mb-4">
+            <app-pedidos-card [pedido]="pedido" [productos]="productos" [insumos]="insumos" (cambiarEstado)="cambiarEstadoPedido($event)" [isUser]="isUser"></app-pedidos-card>
+        </div>
     </div>
-  </div>
+</div>
   
   
