@@ -111,6 +111,7 @@ export class CarritoComponent {
   limpiarCarrito() {
     this.articulosCarrito = [];
     this.guardarCarrito();
+    localStorage.removeItem('carrito');
     this.calcularTotalCarrito();
   }
 }
