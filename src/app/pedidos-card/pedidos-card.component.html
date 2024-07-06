@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-header">
+      <h5>Pedido #{{ pedido.id }}</h5>
+      <p>Fecha de Pedido: {{ pedido.fechaPedido | date }}</p>
+      <p>Fecha de Entrega: {{ pedido.fechaEntrega | date }}</p>
+      <p>Estado: {{ pedido.estado }}</p>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let item of pedido.productos">
+        <app-productos-pedidos-card *ngIf="productos[item.productoId]" [insumos]="insumos" [producto]="productos[item.productoId]" [cantidad]="item.cantidad"/> 
+      </div>
+    </div>
+  </div>

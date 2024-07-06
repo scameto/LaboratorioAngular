@@ -122,48 +122,9 @@
 <div class="container mt-4">
     <div class="row">
       <div *ngFor="let pedido of pedidos" class="col-md-4 mb-4">
-        <div class="card">
-          <div class="card-header">
-            <h5>Pedido #{{ pedido.id }}</h5>
-            <p>Fecha de Pedido: {{ pedido.fechaPedido | date }}</p>
-            <p>Fecha de Entrega: {{ pedido.fechaEntrega | date }}</p>
-            <p>Estado: {{ pedido.estado }}</p>
-          </div>
-          <div class="card-body">
-            <div *ngFor="let item of pedido.productos">
-              <div *ngIf="productos[item.productoId]" class="media mb-3">
-                <img [src]="productos[item.productoId].imagen" class="mr-3" alt="{{ productos[item.productoId].nombre }}" style="width: 64px; height: 64px;">
-                <div class="media-body">
-                  <h5 class="mt-0">{{ productos[item.productoId].nombre }}</h5>
-                  <p>Cantidad: {{ item.cantidad }}</p>
-                  <button class="btn btn-primary" (click)="toggleInsumos(item.productoId)">
-                    {{ insumosVisible[item.productoId] ? 'Ocultar Insumos' : 'Mostrar Insumos' }}
-                  </button>
-                  <div *ngIf="insumosVisible[item.productoId]">
-                    <h6>Insumos necesarios:</h6>
-                    <table class="table table-striped">
-                      <thead>
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Cantidad</th>
-                          <th>Unidad de Medida</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let pi of productos[item.productoId].productoInsumos">
-                          <td>{{ insumos[pi.insumoId]?.nombre }}</td>
-                          <td>{{ pi.cantidad }}</td>
-                          <td>{{ insumos[pi.insumoId]?.unidad_medida }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <app-pedidos-card [pedido]="pedido" [productos]="productos" [insumos]="insumos"></app-pedidos-card>
       </div>
     </div>
   </div>
+  
   

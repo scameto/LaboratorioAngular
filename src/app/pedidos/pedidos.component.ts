@@ -211,55 +211,59 @@ export class PedidosComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.cargarInsumos();
-    this.loadPedidos();
+    this.loadInsumos();
   }
 
-/*   cargarInsumos() {
-    this.insumoService.getInsumos().subscribe(
-      insumos => {
-        this.insumos = insumos;
-        this.loadPedidos();  // Cargar los pedidos después de haber cargado los insumos
-      },
-      error => {
-        //this.toastr.error('Hubo un problema al cargar los insumos.');
-      }
-    );
-  } */
+  loadInsumos(): void {
+    this.insumoService.getInsumosActivos().subscribe(insumos => {
+      insumos.forEach(insumo => {
+        this.insumos[insumo.id] = insumo;
+      });
+      console.log('Insumos cargados:', this.insumos);  // Debug
+      this.loadPedidos();
+    }, error => {
+      console.error('Error al cargar todos los insumos:', error);  // Debug
+    });
+  }
 
   loadPedidos(): void {
     this.pedidoService.getPedidos().subscribe(pedidos => {
       this.pedidos = pedidos;
+      console.log('Pedidos cargados:', this.pedidos);  // Debug
       this.loadProductos();
     });
   }
 
   loadProductos(): void {
+    const productIds = new Set<number>();
     this.pedidos.forEach(pedido => {
-      pedido.productos.forEach(item => {
-        this.productService.getProductoById(item.productoId).subscribe(producto => {
-          this.productos[item.productoId] = producto;
-          this.loadInsumos(producto);
-        });
+      pedido.productos.forEach(item => productIds.add(item.productoId));
+    });
+
+    productIds.forEach(id => {
+      this.productService.getProductoById(id).subscribe(producto => {
+        this.productos[id] = producto;
+        console.log('Producto cargado:', producto);  // Debug
+        this.assignInsumosToProduct(producto);
       });
     });
   }
 
-  loadInsumos(product: Product): void {
-    if (product && product.productoInsumos) {
-      const insumoIds = product.productoInsumos.map(pi => pi.insumoId);
-      this.insumoService.getInsumosByIds(insumoIds).subscribe(insumos => {
-        insumos.forEach(insumo => {
-          this.insumos[insumo.id] = insumo;
-        });
+  assignInsumosToProduct(product: Product): void {
+    if (product && product.insumos) {
+      product.insumos.forEach(pi => {
+        const insumo = this.insumos[pi.insumoId];        
+        if (insumo) {
+          pi.insumoId = Number(insumo.id);
+        } else {
+          console.warn(`Insumo con ID ${pi.insumoId} no encontrado para el producto ${product.nombre}`);
+        }
       });
+      console.log('Producto con insumos asignados:', product);  // Debug
     } else {
       console.error('Error: producto o productoInsumos no definidos');
     }
   }
-  
 
-  toggleInsumos(productoId: number): void {
-    this.insumosVisible[productoId] = !this.insumosVisible[productoId];
-  }
+
 }

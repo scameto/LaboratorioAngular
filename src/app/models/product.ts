@@ -6,7 +6,8 @@ export class Product {
   descripcion: string;
   imagen: string;
   precio: number;
-  productoInsumos: ProductoInsumo[];
+  insumos: ProductoInsumo[];  
+
   borrado: boolean;
 
   constructor(id: number, nombre: string, descripcion: string, imagen: string, precio: number, productoInsumos: ProductoInsumo[]) {
@@ -15,7 +16,7 @@ export class Product {
     this.descripcion = descripcion;
     this.imagen = imagen;
     this.precio = precio;
-    this.productoInsumos = productoInsumos;
+    this.insumos = productoInsumos;
     this.borrado = false;
   }
 }

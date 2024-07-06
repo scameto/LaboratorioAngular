@@ -1,0 +1,29 @@
+<div  class="media mb-3">
+    <img [src]="producto.imagen" class="mr-3" alt="{{ producto.nombre }}" style="width: 64px; height: 64px;">
+    <div class="media-body">
+      <h5 class="mt-0">{{ producto.nombre }}</h5>
+      <p>Cantidad: {{ cantidad }}</p>
+      <button class="btn btn-primary" (click)="toggleInsumos()">
+        {{ insumosVisible ? 'Ocultar Insumos' : 'Mostrar Insumos' }}
+      </button>
+      <div *ngIf="insumosVisible">
+        <h6>Insumos necesarios:</h6>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Cantidad</th>
+              <th>Unidad de Medida</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr *ngFor="let pi of producto.insumos">
+            <td>{{ insumos[pi.insumoId].nombre || 'Desconocido' }}</td>
+            <td>{{ pi.cantidad }}</td>
+            <td>{{ insumos[pi.insumoId].unidad_medida || 'N/A' }}</td> 
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

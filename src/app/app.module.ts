@@ -32,6 +32,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { PedidosCardComponent } from './pedidos-card/pedidos-card.component';
+import { ProductosPedidosCardComponent } from './productos-pedidos-card/productos-pedidos-card.component';
 
 
 @NgModule({
@@ -52,6 +54,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     PedidosListComponent,
     CarritoComponent,
     PedidosComponent,
+    PedidosCardComponent,
+    ProductosPedidosCardComponent,
     
     
     
