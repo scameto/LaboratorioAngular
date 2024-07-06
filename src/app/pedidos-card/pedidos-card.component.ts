@@ -13,7 +13,7 @@ export class PedidosCardComponent {
   @Input() pedido!: Pedido;
   @Input() productos!:  { [key: number]: Product };
   @Input() insumos!: { [key: number]: Insumo };
-  @Input() isUser!: boolean;
+  @Input() esUsuario!: boolean;
   @Output() cambiarEstado = new EventEmitter<Pedido>();
 
   onCambiarEstadoPedido(): void {

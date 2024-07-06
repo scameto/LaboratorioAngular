@@ -5,7 +5,7 @@
       <p>Fecha de Entrega: {{ pedido.fechaEntrega | date }}</p>
       <p>Estado: {{ pedido.estado }}</p>
     </div>
-    <button class="btn btn-primary" *ngIf="!isUser" (click)="onCambiarEstadoPedido()">Cambiar Estado</button>
+    <button class="btn btn-primary" *ngIf="!esUsuario" (click)="onCambiarEstadoPedido()">Cambiar Estado</button>
     <div class="card-body">
       <div *ngFor="let item of pedido.productos">
         <app-productos-pedidos-card *ngIf="productos[item.productoId]" [insumos]="insumos" [producto]="productos[item.productoId]" [cantidad]="item.cantidad"/> 
